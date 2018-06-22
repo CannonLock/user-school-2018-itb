@@ -90,7 +90,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Now, load the <code>stashcp</code> module, which will allow you to test a copy of the file from StashCache into your home directory on <code>login.osgconnect.net</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;module load stashcp&lt;/strong&gt;
 <span class="gp">user@user-training $</span> &lt;strong&gt;module load xrootd&lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;stashcp /user/%RED%username%ENDCOLOR%/public/pdbaa_files.tar.gz ./&lt;/strong&gt;
+<span class="gp">user@user-training $</span> &lt;strong&gt;stashcp /user/<span style="color:red">username</span>/public/pdbaa_files.tar.gz ./&lt;/strong&gt;
 </pre></div>
 
 
@@ -102,7 +102,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </ol>
 <div class="codehilite"><pre><span></span><span class="k">module</span> <span class="n">load</span> <span class="n">xrootd</span>
 <span class="k">module</span> <span class="n">load</span> <span class="n">stashcp</span>
-<span class="n">stashcp</span> /<span class="n">user</span>/<span class="nv">%RED%username%ENDCOLOR</span>%/<span class="n">public</span><span class="o">/</span><span class="n">pdbaa_files</span>.<span class="n">tar</span>.<span class="n">gz</span> ./
+<span class="n">stashcp</span> /<span class="n">user</span>/<span class="nv"><span style="color:red">username%ENDCOLOR</span>%/<span class="n">public</span><span class="o">/</span><span class="n">pdbaa_files</span>.<span class="n">tar</span>.<span class="n">gz</span> ./
 </pre></div>
 
 

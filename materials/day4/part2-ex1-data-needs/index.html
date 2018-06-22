@@ -94,16 +94,16 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <h2 id="understanding-blast">Understanding blast<a class="headerlink" href="#understanding-blast" title="Permanent link">&para;</a></h2>
 <p>Remember that <code>blastx</code> is executed in a command like the following:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;blastx -db %RED%database_rootname%ENDCOLOR% -query %RED%input_file%ENDCOLOR% -out %RED%results_file%ENDCOLOR%&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;blastx -db <span style="color:red">database_rootname</span> -query <span style="color:red">input_file</span> -out <span style="color:red">results_file</span>&lt;/strong&gt;
 </pre></div>
 
 
 <p>In the above, the <code>input_file</code> is a file containing a number of genetic sequences, and the database that these are compared against is made up of several files that begin with the same root name (we previously used the "pdbaa" database, whose files all begin with <code>pdbaa</code>). The output from this analysis will be printed to a results file that is also indicated in the command.</p>
 <h2 id="adding-up-data-needs">Adding up data needs<a class="headerlink" href="#adding-up-data-needs" title="Permanent link">&para;</a></h2>
 <p>Looking at the files from the <code>blastx</code> jobs you ran yesterday, add up the amount of data that was needed for running the job. (If you deleted any of the files from yesterday, just resubmit the job before proceeding.) Here are the commands that will be most useful to you:</p>
-<p>How to see the size of a specific file: <pre class="screen"> user@host $ <strong>ls -lh %RED%file<span class="twiki-macro ENDCOLOR"></span></strong> </pre></p>
+<p>How to see the size of a specific file: <pre class="screen"> user@host $ <strong>ls -lh <span style="color:red">file<span class="twiki-macro ENDCOLOR"></span></strong> </pre></p>
 <p>How to see the size of all files in the current directory: <pre class="screen"> user@host $ <strong>ls -lh</strong> </pre></p>
-<p>How to determine the total amount of data in the current directory: <pre class="screen"> user@host $ <strong>du -sh %RED%directory<span class="twiki-macro ENDCOLOR"></span></strong> </pre></p>
+<p>How to determine the total amount of data in the current directory: <pre class="screen"> user@host $ <strong>du -sh <span style="color:red">directory<span class="twiki-macro ENDCOLOR"></span></strong> </pre></p>
 <h3 id="input-requirements">Input requirements<a class="headerlink" href="#input-requirements" title="Permanent link">&para;</a></h3>
 <p>Looking at yesterday's exercise, total up the amount of data in all of the files necessary to run the <code>blastx</code> job (which will include the executable, itself). Write down this number. Also take note of how much total data in in the <code>pdbaa</code> directory.</p>
 <h3 id="output-requirements">Output requirements<a class="headerlink" href="#output-requirements" title="Permanent link">&para;</a></h3>

@@ -127,7 +127,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 module load stashcp
-stashcp /user/%RED%username%ENDCOLOR%/public/test_open_terminal.mov ./
+stashcp /user/<span style="color:red">username</span>/public/test_open_terminal.mov ./
 ./ffmpeg -i test_open_terminal.mov -b:v 400k -s 640x360 test_open_terminal.mp4
 rm test_open_terminal.mov
 </pre></div>
@@ -183,7 +183,7 @@ requirements = (OpSys == &quot;LINUX&quot;) &amp;&amp; (HAS_MODULES =?= true)
 <div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 module load stashcp
-stashcp /user/%RED%username%ENDCOLOR%/public/<span class="nv">$1</span> ./
+stashcp /user/<span style="color:red">username</span>/public/<span class="nv">$1</span> ./
 ./ffmpeg -i <span class="nv">$1</span> -b:v 400k -s 640x360 <span class="nv">$2</span>
 rm <span class="nv">$1</span>
 </pre></div>
@@ -239,7 +239,7 @@ queue mov,mp4,bitrate,size from movie_list.txt
 <div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 module load stashcp
-stashcp /user/%RED%username%ENDCOLOR%/public/<span class="nv">$1</span> ./
+stashcp /user/<span style="color:red">username</span>/public/<span class="nv">$1</span> ./
 ./ffmpeg -i <span class="nv">$1</span> -b:v <span class="nv">$3</span> -s <span class="nv">$4</span> <span class="nv">$2</span>
 rm <span class="nv">$1</span>
 </pre></div>

@@ -74,9 +74,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 
 <h3 id="test-a-download-of-the-file">Test a download of the file<a class="headerlink" href="#test-a-download-of-the-file" title="Permanent link">&para;</a></h3>
-<p>Once the file is placed in the ~/stash/public directory, it can be downloaded from a corresponding URL such as <code>http://stash.osgconnect.net/~%RED%username%ENDCOLOR%/pdbaa_files.tar.gz</code>, where %RED%username<span class="twiki-macro ENDCOLOR"></span> is your username on <code>user-training.osgconnect.net</code>.</p>
+<p>Once the file is placed in the ~/stash/public directory, it can be downloaded from a corresponding URL such as <code>http://stash.osgconnect.net/~<span style="color:red">username</span>/pdbaa_files.tar.gz</code>, where <span style="color:red">username<span class="twiki-macro ENDCOLOR"></span> is your username on <code>user-training.osgconnect.net</code>.</p>
 <p>Using the above convention (and from a different directory on <code>user-training.osgconnect.net</code>, any directory), you can test the download of your <code>pdbaa_files.tar.gz</code> file with a command like the following:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;wget http://stash.osgconnect.net/~%RED%username%ENDCOLOR%/pdbaa_files.tar.gz&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;wget http://stash.osgconnect.net/~<span style="color:red">username</span>/pdbaa_files.tar.gz&lt;/strong&gt;
 </pre></div>
 
 
@@ -86,13 +86,13 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h3 id="modify-the-submit-file-and-wrapper-script">Modify the submit file and wrapper script<a class="headerlink" href="#modify-the-submit-file-and-wrapper-script" title="Permanent link">&para;</a></h3>
 <p>In the wrapper script, we have to add some special lines so that we can pull from Stash and use the HTTP proxy. In <code>blast_wrapper.sh</code>, we will have to add commands to pull the data file:</p>
 <div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
-%RED%
+<span style="color:red">
 <span class="c1"># Set an environment variable to point to the local Proxy location at the cluster</span>
 <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span><span class="nv">$OSG_SQUID_LOCATION</span>
 <span class="c1"># Copy the pdbaa_files.tar.gz to the worker node</span>
 <span class="c1"># Add the -S argument, so we can see if it was a cache HIT or MISS</span>
 wget -S http://stash.osgconnect.net/~username/pdbaa_files.tar.gz
-%ENDCOLOR%
+</span>
 tar xvzf pdbaa_files.tar.gz
 tar xvzf blastx.tar.gz
 

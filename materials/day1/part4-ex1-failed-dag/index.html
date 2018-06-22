@@ -67,7 +67,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Recall that DAGMan decides that a jobs fails if its exit code is non-zero. Let's modify our montage job so that it fails. Work in the same directory where you did the last DAG. Edit montage.sub to add a <code>-h</code> to the arguments. It will look like this (the change is highlighted in red):</p>
 <div class="codehilite"><pre><span></span><span class="go">universe                = vanilla</span>
 <span class="go">executable              = /usr/bin/montage</span>
-<span class="go">arguments               = %RED%-h%ENDCOLOR% tile_0_0.ppm tile_0_1.ppm tile_1_0.ppm tile_1_1.ppm -mode Concatenate -tile 2x2 mandle.jpg</span>
+<span class="go">arguments               = <span style="color:red">-h</span> tile_0_0.ppm tile_0_1.ppm tile_1_0.ppm tile_1_1.ppm -mode Concatenate -tile 2x2 mandle.jpg</span>
 <span class="go">transfer_input_files    = tile_0_0.ppm,tile_0_1.ppm,tile_1_0.ppm,tile_1_1.ppm</span>
 <span class="go">transfer_executable     = false</span>
 <span class="go">output                  = montage.out</span>
@@ -121,11 +121,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <span class="go">... output trimmed ...</span>
 
-<span class="gp">%</span>RED%06/22/12 <span class="m">18</span>:08:42 Event: ULOG_EXECUTE <span class="k">for</span> Condor Node montage <span class="o">(</span><span class="m">82</span>.0.0<span class="o">)</span>%ENDCOLOR%
+<span class="gp">%</span>RED%06/22/12 <span class="m">18</span>:08:42 Event: ULOG_EXECUTE <span class="k">for</span> Condor Node montage <span class="o">(</span><span class="m">82</span>.0.0<span class="o">)</span></span>
 <span class="go">06/22/12 18:08:42 Number of idle job procs: 0</span>
 <span class="go">06/22/12 18:08:42 Event: ULOG_IMAGE_SIZE for Condor Node montage (82.0.0)</span>
 <span class="go">06/22/12 18:08:42 Event: ULOG_JOB_TERMINATED for Condor Node montage (82.0.0)</span>
-<span class="gp">%</span>RED%06/22/12 <span class="m">18</span>:08:42 Node montage job proc <span class="o">(</span><span class="m">82</span>.0.0<span class="o">)</span> failed with status <span class="m">1</span>.%ENDCOLOR%
+<span class="gp">%</span>RED%06/22/12 <span class="m">18</span>:08:42 Node montage job proc <span class="o">(</span><span class="m">82</span>.0.0<span class="o">)</span> failed with status <span class="m">1</span>.</span>
 <span class="go">06/22/12 18:08:42 Number of idle job procs: 0</span>
 <span class="go">06/22/12 18:08:42 Of 5 nodes total:</span>
 <span class="go">06/22/12 18:08:42  Done     Pre   Queued    Post   Ready   Un-Ready   Failed</span>
@@ -139,7 +139,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="go">06/22/12 18:08:42 Note: 0 total job deferrals because of node category throttles</span>
 <span class="go">06/22/12 18:08:42 Note: 0 total PRE script deferrals because of -MaxPre limit (0)</span>
 <span class="go">06/22/12 18:08:42 Note: 0 total POST script deferrals because of -MaxPost limit (0)</span>
-<span class="gp">%</span>RED%06/22/12 <span class="m">18</span>:08:42 **** condor_scheduniv_exec.77.0 <span class="o">(</span>condor_DAGMAN<span class="o">)</span> pid <span class="m">26867</span> EXITING WITH STATUS <span class="m">1</span>%ENDCOLOR%
+<span class="gp">%</span>RED%06/22/12 <span class="m">18</span>:08:42 **** condor_scheduniv_exec.77.0 <span class="o">(</span>condor_DAGMAN<span class="o">)</span> pid <span class="m">26867</span> EXITING WITH STATUS <span class="m">1</span></span>
 </pre></div>
 
 
@@ -149,12 +149,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="gp">#</span> Rescue DAG file, created after running
 <span class="gp">#</span>   the goatbrot.dag DAG file
 <span class="gp">#</span> Created <span class="m">6</span>/22/2012 <span class="m">23</span>:08:42 UTC
-<span class="gp">%</span>RED%# Rescue DAG version: <span class="m">2</span>.0.1 <span class="o">(</span>partial<span class="o">)</span>%ENDCOLOR%
+<span class="gp">%</span>RED%# Rescue DAG version: <span class="m">2</span>.0.1 <span class="o">(</span>partial<span class="o">)</span></span>
 <span class="gp">#</span>
 <span class="gp">#</span> Total number of Nodes: <span class="m">5</span>
 <span class="gp">#</span> Nodes premarked DONE: <span class="m">4</span>
 <span class="gp">%</span>RED%# Nodes that failed: <span class="m">1</span>
-<span class="gp">#</span>   montage,&lt;ENDLIST&gt;%ENDCOLOR%
+<span class="gp">#</span>   montage,&lt;ENDLIST&gt;</span>
 
 <span class="go">DONE g1</span>
 <span class="go">DONE g2</span>
@@ -181,7 +181,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <p>Now we can re-submit our original DAG and DAGMan will pick up where it left off. It will automatically notice the rescue DAG If you didn't fix the problem, DAGMan would generate another rescue DAG.</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span> condor_submit_dag goatbrot.dag
-<span class="gp">%</span>RED%Running rescue DAG <span class="m">1</span>%ENDCOLOR%
+<span class="gp">%</span>RED%Running rescue DAG <span class="m">1</span></span>
 <span class="go">-----------------------------------------------------------------------</span>
 <span class="go">File for submitting this DAG to Condor           : goatbrot.dag.condor.sub</span>
 <span class="go">Log of DAGMan debugging messages                 : goatbrot.dag.dagman.out</span>
@@ -208,22 +208,22 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="go">...</span>
 
 
-<span class="gp">%</span>RED%Here is where DAGMAN notices that there is a rescue DAG%ENDCOLOR%
+<span class="gp">%</span>RED%Here is where DAGMAN notices that there is a rescue DAG</span>
 <span class="go">06/23/12 11:30:53 Parsing 1 dagfiles</span>
 <span class="go">06/23/12 11:30:53 Parsing goatbrot.dag ...</span>
-<span class="gp">%</span>RED%06/23/12 <span class="m">11</span>:30:53 Found rescue DAG number <span class="m">1</span><span class="p">;</span> running goatbrot.dag.rescue001 in combination with normal DAG file%ENDCOLOR%
+<span class="gp">%</span>RED%06/23/12 <span class="m">11</span>:30:53 Found rescue DAG number <span class="m">1</span><span class="p">;</span> running goatbrot.dag.rescue001 in combination with normal DAG file</span>
 <span class="go">06/23/12 11:30:53 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <span class="go">06/23/12 11:30:53 USING RESCUE DAG goatbrot.dag.rescue001</span>
 <span class="go">06/23/12 11:30:53 Dag contains 5 total jobs</span>
 
-<span class="gp">%</span>RED%Shortly thereafter it sees that four <span class="nb">jobs</span> have already finished.%ENDCOLOR%
+<span class="gp">%</span>RED%Shortly thereafter it sees that four <span class="nb">jobs</span> have already finished.</span>
 <span class="go">06/23/12 11:31:05 Bootstrapping...</span>
 <span class="go">06/23/12 11:31:05 Number of pre-completed nodes: 4</span>
 <span class="go">06/23/12 11:31:05 Registering condor_event_timer...</span>
 <span class="go">06/23/12 11:31:06 Sleeping for one second for log file consistency</span>
 <span class="go">06/23/12 11:31:07 MultiLogFiles: truncating log file /home/roy/condor/goatbrot/montage.log</span>
 
-<span class="gp">%</span>RED%Here is where DAGMan resubmits the montage job and waits <span class="k">for</span> it to complete.%ENDCOLOR%
+<span class="gp">%</span>RED%Here is where DAGMan resubmits the montage job and waits <span class="k">for</span> it to complete.</span>
 <span class="go">06/23/12 11:31:07 Submitting Condor Node montage job(s)...</span>
 <span class="go">06/23/12 11:31:07 submitting: condor_submit </span>
 <span class="go">      -a dag_node_name&#39; &#39;=&#39; &#39;montage </span>
@@ -252,7 +252,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="go">06/23/12 11:40:22 Event: ULOG_IMAGE_SIZE for Condor Node montage (84.0.0)</span>
 <span class="go">06/23/12 11:40:22 Event: ULOG_JOB_TERMINATED for Condor Node montage (84.0.0)</span>
 
-<span class="gp">%</span>RED%This is where the montage finished.%ENDCOLOR%
+<span class="gp">%</span>RED%This is where the montage finished.</span>
 <span class="go">06/23/12 11:40:22 Node montage job proc (84.0.0) completed successfully.</span>
 <span class="go">06/23/12 11:40:22 Node montage job completed</span>
 <span class="go">06/23/12 11:40:22 Number of idle job procs: 0</span>
@@ -262,7 +262,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="go">06/23/12 11:40:22     5       0        0       0       0          0        0</span>
 <span class="go">06/23/12 11:40:22 0 job proc(s) currently held</span>
 
-<span class="gp">%</span>RED%And here DAGMan decides that the work is all <span class="k">done</span>.%ENDCOLOR%
+<span class="gp">%</span>RED%And here DAGMan decides that the work is all <span class="k">done</span>.</span>
 <span class="go">06/23/12 11:40:22 All jobs Completed!</span>
 <span class="go">06/23/12 11:40:22 Note: 0 total job deferrals because of -MaxJobs limit (0)</span>
 <span class="go">06/23/12 11:40:22 Note: 0 total job deferrals because of -MaxIdle limit (0)</span>
