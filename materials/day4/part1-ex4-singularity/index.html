@@ -63,17 +63,17 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>In this tutorial, we see how to submit a [tensorflow](<a href="https://www.tensorflow.org/">https://www.tensorflow.org/</a>) job on the OSG through [Singularity containers](<a href="https://support.opensciencegrid.org/solution/articles/12000024676-singularity-containers">https://support.opensciencegrid.org/solution/articles/12000024676-singularity-containers</a>). We currently offer CPU and GPU containers for tensorflow (both based on Ubuntu). Here, we focus on CPU container.</p>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Make sure you are logged into <code>user-training.osgconnect.net</code> (the OSG Connect submit server for this workshop).</li>
+<li>Make sure you are logged into <code>training.osgconnect.net</code> (the OSG Connect submit server for this workshop).</li>
 </ul>
 <h2 id="get-the-example-files-and-understand-the-job-requirements">Get the example files and understand the job requirements.<a class="headerlink" href="#get-the-example-files-and-understand-the-job-requirements" title="Permanent link">&para;</a></h2>
 <p>Let us utilize the <code>tutorial</code> command. In the command prompt, type</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;tutorial tf-matmul  &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> tutorial tf-matmul  
 </pre></div>
 
 
 <p>This creates a directory <code>tutorial-tf-matmul</code>. Go inside the directory and see what is inside.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cd tutorial-tf-matmul&lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;ls -F&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> <span class="nb">cd</span> tutorial-tf-matmul
+<span class="gp">username@training $</span> ls -F
 </pre></div>
 
 
@@ -100,7 +100,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>The image is distributed to the remote worker machines through `cvmfs`. Although there are multiple ways to obtain the image file for a job on the OSG machine, the image distributed through `cvmfs` is preferred.</p>
 <h2 id="submit-the-tensorflow-example-job">Submit the tensorflow example job<a class="headerlink" href="#submit-the-tensorflow-example-job" title="Permanent link">&para;</a></h2>
 <p>Submit the job.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;condor_submit tf_matmul.submit &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> condor_submit tf_matmul.submit 
 </pre></div>
 
 

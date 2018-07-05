@@ -63,7 +63,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>In this exercise, you'll use a software package called GROMACS that was already installed on OASIS. GROMACS is a molecular dynamics simulation program.</p>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Make sure you are logged into <code>user-training.osgconnect.net</code> (the OSG Connect submit server for this workshop).</li>
+<li>Make sure you are logged into <code>training.osgconnect.net</code> (the OSG Connect submit server for this workshop).</li>
 </ul>
 <h2 id="practice-loading-the-gromacs-module-on-osg-connect-submit-host">Practice Loading the GROMACS Module on OSG Connect submit host<a class="headerlink" href="#practice-loading-the-gromacs-module-on-osg-connect-submit-host" title="Permanent link">&para;</a></h2>
 <p>Before proceeding, make sure to read over the OSG Connect help desk guide on <a href="https://support.opensciencegrid.org/support/solutions/articles/5000634394-accessing-software-using-distributed-environment-modules">Accessing Software using Distributed Environment Modules</a>.</p>
@@ -75,15 +75,15 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Before loading the <code>gromacs</code> module, check your "PATH" variable with:</p>
 </li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;echo <span class="nv">$PATH</span>&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> <span class="nb">echo</span> <span class="nv">$PATH</span>
 </pre></div>
 
 
 <ol>
 <li>Now load the <code>gromacs</code> module, which will give you the default version, and check your list of modules:</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;module load gromacs&lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;module list&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> module load gromacs
+<span class="gp">username@training $</span> module list
 </pre></div>
 
 
@@ -95,22 +95,22 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>When you're done, unload the module and check that you no longer have the module loaded:</p>
 </li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;module unload gromacs&lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;module list&lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;echo <span class="nv">$PATH</span>&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> module unload gromacs
+<span class="gp">username@training $</span> module list
+<span class="gp">username@training $</span> <span class="nb">echo</span> <span class="nv">$PATH</span>
 </pre></div>
 
 
 <h2 id="submit-a-job-that-uses-gromacs-from-oasis">Submit a job that uses GROMACS from OASIS<a class="headerlink" href="#submit-a-job-that-uses-gromacs-from-oasis" title="Permanent link">&para;</a></h2>
 <p>Now let us see how to do a job submission on the OSG that uses GROMACS on OASIS (you don't have to transfer GROMACS source or the binary along with the job).</p>
 <p>We will get the example files using the <code>tutorial</code> command.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;tutorial gromacs&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> tutorial gromacs
 </pre></div>
 
 
 <p>This creates a directory <code>tutorial-quickstart</code>. Go inside the directory and see what is inside.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cd tutorial-gromacs&lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;ls -F &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> <span class="nb">cd</span> tutorial-gromacs
+<span class="gp">username@training $</span> ls -F 
 </pre></div>
 
 
@@ -120,12 +120,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 
 <p>Take a look at the job description file</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cat gromacs_job.submit &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> cat gromacs_job.submit 
 </pre></div>
 
 
 <p>The modules are loaded in the wrapper script before executing the actual job. In this example, gromacs is loaded before running the actual simulation.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cat gromacs_job.sh&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> cat gromacs_job.sh
 </pre></div>
 
 
@@ -135,12 +135,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 
 <p>Check the job description file.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cat gromacs_job.submit &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> cat gromacs_job.submit 
 </pre></div>
 
 
 <p>Let's submit the job.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;condor_submit gromacs_job.submit &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> condor_submit gromacs_job.submit 
 </pre></div>
 
 

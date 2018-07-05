@@ -63,20 +63,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <p>--+ !Thursday Exercise 1.2: Do the OSG Connect Quickstart</p>
-<p>For this exercise, you can also follow the online guide from the OSG Connect helpdesk that will acquaint you with submission on the OSG Connect submit server. Please use the submit host user-training.osgconnect.net instead of login.osgconnect.net for the workshop.</p>
+<p>For this exercise, you can also follow the online guide from the OSG Connect helpdesk that will acquaint you with submission on the OSG Connect submit server. Please use the submit host training.osgconnect.net instead of login.osgconnect.net for the workshop.</p>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 <ul>
-<li>SSH into <code>user-training.osgconnect.net</code> (the OSG Connect submit server for this workshop).</li>
+<li>SSH into <code>training.osgconnect.net</code> (the OSG Connect submit server for this workshop).</li>
 </ul>
 <h2 id="get-the-example-files-for-the-tutorial-osg-connect-quickstart-via-tutorial-command">Get the example files for the tutorial "OSG Connect Quickstart" via <code>tutorial</code> command<a class="headerlink" href="#get-the-example-files-for-the-tutorial-osg-connect-quickstart-via-tutorial-command" title="Permanent link">&para;</a></h2>
 <p>We will get the example files using the <code>tutorial</code> command.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;tutorial quickstart&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> tutorial quickstart
 </pre></div>
 
 
 <p>This creates a directory <code>tutorial-quickstart</code>. Go inside the directory and see what is inside.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cd tutorial-quickstart&lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;ls -F &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> <span class="nb">cd</span> tutorial-quickstart
+<span class="gp">username@training $</span> ls -F 
 </pre></div>
 
 
@@ -88,24 +88,24 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>We will focus our attention on <code>short.sh</code> (execution file) and <code>tutorial01.submit</code>. We will not worry about other files in this exercise. Feel free to take a look at other files if you are interested.</p>
 <h2 id="job-execution-file">Job Execution File<a class="headerlink" href="#job-execution-file" title="Permanent link">&para;</a></h2>
 <p>Take a look at the job execution file <code>short.sh</code>.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cat short.sh &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> cat short.sh 
 </pre></div>
 
 
 <p>This is a shell script, quite ordinary . Run this shell script locally to see what it does.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;chmod + short.sh &lt;/strong&gt;
-<span class="gp">user@user-training $</span> &lt;strong&gt;./short.sh &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> chmod + short.sh 
+<span class="gp">username@training $</span> ./short.sh 
 </pre></div>
 
 
 <h2 id="submitting-the-job-on-the-osg">Submitting the job on the OSG<a class="headerlink" href="#submitting-the-job-on-the-osg" title="Permanent link">&para;</a></h2>
 <p>The job description file <code>tutorial01.submit</code> executes the shell script <code>short.sh</code> as a vanilla universe job. Take a look at the job description file.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cat tutorial01.submit &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> cat tutorial01.submit 
 </pre></div>
 
 
 <p>Now run this job on the OSG.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;condor_submit tutorial01.submit &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> condor_submit tutorial01.submit 
 </pre></div>
 
 
@@ -117,7 +117,7 @@ job.log: (A log file for each job&#39;s log)
 
 
 <p>Read the output file.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@user-training $</span> &lt;strong&gt;cat job.output &lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@training $</span> cat job.output 
 </pre></div>
 
 
