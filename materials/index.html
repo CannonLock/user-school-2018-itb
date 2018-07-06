@@ -37,7 +37,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "2017 OSG User School Materials", url: "#_top", children: [
+          {title: "2018 OSG User School Materials", url: "#_top", children: [
               {title: "Monday", url: "#monday" },
               {title: "Tuesday", url: "#tuesday" },
               {title: "Wednesday", url: "#wednesday" },
@@ -61,11 +61,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <h1 id="2017-osg-user-school-materials">2017 OSG User School Materials<a class="headerlink" href="#2017-osg-user-school-materials" title="Permanent link">&para;</a></h1>
+    <h1 id="2018-osg-user-school-materials">2018 OSG User School Materials<a class="headerlink" href="#2018-osg-user-school-materials" title="Permanent link">&para;</a></h1>
 <h2 id="monday">Monday<a class="headerlink" href="#monday" title="Permanent link">&para;</a></h2>
-<h3 id="monday-morning-introduction-to-htc">Monday Morning: Introduction to HTC<a class="headerlink" href="#monday-morning-introduction-to-htc" title="Permanent link">&para;</a></h3>
+<h3 id="monday-morning-introduction-to-htc-and-htcondor">Monday Morning: Introduction to HTC and HTCondor<a class="headerlink" href="#monday-morning-introduction-to-htc-and-htcondor" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Lecture: Introduction to HTC (<a href="../materials/day1/files/osgus18-day1-part1-intro-to-htc.pdf">PDF</a>)</li>
+<li>Lecture: Introduction to HTC (<a href="../materials/day1/files/osgus18-day1-part1-intro-to-htc.pdf">PDF</a>;<a href="./osgus18-day1-part1-intro-to-htc.ppt">PPT</a>)</li>
 <li><a href="day1/part1-ex1-login/">Exercise 1.1: Log in to the local submit machine and look around</a></li>
 <li><a href="day1/part1-ex2-commands/">Exercise 1.2: Experiment with basic HTCondor commands</a></li>
 <li><a href="day1/part1-ex3-jobs/">Exercise 1.3: Run jobs!</a></li>
@@ -74,31 +74,29 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><a href="day1/part1-ex6-remove/">Exercise 1.6: Remove jobs from the queue</a></li>
 <li><a href="day1/part1-ex7-compile/">Bonus Exercise 1.7: Compile and run some C code</a></li>
 </ul>
-<h3 id="monday-morning-more-htcondor">Monday Morning: More HTCondor<a class="headerlink" href="#monday-morning-more-htcondor" title="Permanent link">&para;</a></h3>
+<h3 id="monday-morning-running-many-htc-jobs">Monday Morning: Running Many HTC Jobs<a class="headerlink" href="#monday-morning-running-many-htc-jobs" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Lecture: More HTCondor (<a href="../materials/day1/files/osgus18-day1-part2-more-htcondor.pdf">PDF</a>)</li>
-<li><a href="day1/part2-ex1-queue/">Exercise 2.1: Explore <code>condor_q</code></a></li>
-<li><a href="day1/part2-ex2-status/">Exercise 2.2: Explore <code>condor_status</code></a></li>
-<li><a href="day1/part2-ex3-files/">Exercise 2.3: Work with input and output files</a></li>
-<li><a href="day1/part2-ex4-queue-n/">Exercise 2.4: Use <code>queue &lt;em&gt;N&lt;/em&gt;</code>, <code>$(Cluster)</code>, and <code>$(Process)</code></a></li>
-<li><a href="day1/part2-ex5-queue-matching/">Exercise 2.5: Use <code>queue matching</code>, and a custom variable</a></li>
-<li><a href="day1/part2-ex6-queue-from/">Exercise 2.6: Use <code>queue from</code>, and custom variables</a></li>
+<li>Lecture: More HTCondor (<a href="../materials/day1/files/osgus18-day1-part2-many-HTCondor-jobs.pdf">PDF</a>;<a href="../materials/day1/files/osgus18-day1-part2-many-HTCondor-jobs.ppt">PPT</a>)</li>
+<li><a href="day1/part2-ex1-files/">Exercise 2.1: Work with input and output files</a></li>
+<li><a href="day1/part2-ex2-queue-n/">Exercise 2.2: Use <code>queue N</code>, <code>$(Cluster)</code>, and <code>$(Process)</code></a></li>
+<li><a href="day1/part2-ex3-queue-matching/">Exercise 2.3: Use <code>queue matching</code> with a custom variable</a></li>
+<li><a href="day1/part2-ex4-queue-from/">Exercise 2.4: Use <code>queue from</code> with custom variables</a></li>
 </ul>
-<h3 id="monday-afternoon-retrying-jobs-and-workflows-with-dagman">Monday Afternoon: Retrying jobs and Workflows with DAGMan<a class="headerlink" href="#monday-afternoon-retrying-jobs-and-workflows-with-dagman" title="Permanent link">&para;</a></h3>
+<h3 id="monday-afternoon-job-attributes-and-handling">Monday Afternoon: Job Attributes and Handling<a class="headerlink" href="#monday-afternoon-job-attributes-and-handling" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Lecture: Intermediate HTCondor: Workflows (<a href="../materials/day1/files/osgus18-day1-part3-dagman1.pdf">PDF</a>)</li>
-<li><a href="day1/part3-ex1-job-retry/">Exercise 3.1: A job that needs retries</a></li>
-<li><a href="day1/part3-ex2-mandelbrot/">Exercise 3.2: A brief detour through the Mandelbrot set</a></li>
-<li><a href="day1/part3-ex3-simple-dag/">Exercise 3.3: Coordinating set of jobs: A simple DAG</a></li>
-<li><a href="day1/part3-ex4-complex-dag/">Exercise 3.4: A more complex DAG</a></li>
+<li>Lecture: Intermediate HTCondor: Workflows (<a href="../materials/day1/files/osgus18-day1-part3-matching-handling.pdf">PDF</a>;<a href="./osgus18-day1-part3-matching-handling.ppt">PPT</a>)</li>
+<li><a href="day1/part3-ex1-queue/">Exercise 3.1: Explore <code>condor_q</code></a></li>
+<li><a href="day1/part3-ex2-status/">Exercise 3.2: Explore <code>condor_status</code></a></li>
+<li><a href="day1/part3-ex3-job-retry/">Exercise 3.3: A job that needs retries</a></li>
 </ul>
-<h3 id="monday-afternoon-intermediate-workflows-with-dagman">Monday Afternoon: Intermediate Workflows with DAGMan<a class="headerlink" href="#monday-afternoon-intermediate-workflows-with-dagman" title="Permanent link">&para;</a></h3>
+<h3 id="monday-afternoon-automating-workflows-with-htcondors-dagman">Monday Afternoon: Automating Workflows with HTCondor's DAGMan<a class="headerlink" href="#monday-afternoon-automating-workflows-with-htcondors-dagman" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Lecture: HTCondor: More on Workflows (<a href="../materials/day1/files/osgus18-day1-part4-dagman2.pdf">PDF</a>)</li>
-<li><a href="day1/part4-ex1-failed-dag/">Exercise 4.1: Handling jobs that fail with DAGMan</a></li>
-<li><a href="day1/part4-ex2-dag-vars/">Exercise 4.2: Simpler DAGs with variable substitutions</a></li>
-<li><a href="day1/part4-ex3-dag-splice/">Exercise 4.3: Using DAG SPLICE for node organization</a></li>
-<li><a href="day1/part4-ex4-challenges/">Bonus Exercise 4.4: HTCondor challenges</a> (If and only if you have time)</li>
+<li>Lecture: HTCondor: More on Workflows (<a href="../materials/day1/files/osgus18-day1-part4-dagman.pdf">PDF</a>;<a href="../materials/day1/files/osgus18-day1-part4-dagman.ppt">PPT</a>)</li>
+<li><a href="day1/part4-ex1-mandelbrot/">Exercise 4.1: A brief detour through the Mandelbrot set</a></li>
+<li><a href="day1/part4-ex2-simple-dag/">Exercise 4.2: Coordinating set of jobs: A simple DAG</a></li>
+<li><a href="day1/part4-ex3-complex-dag/">Exercise 4.3: A more complex DAG</a></li>
+<li><a href="day1/part4-ex4-failed-dag/">Exercise 4.4: Handling jobs that fail with DAGMan</a></li>
+<li><a href="day1/part4-ex5-challenges/">Bonus Exercise 4.5: HTCondor challenges</a> (If and only if you have time)</li>
 </ul>
 <h2 id="tuesday">Tuesday<a class="headerlink" href="#tuesday" title="Permanent link">&para;</a></h2>
 <h3 id="tuesday-morning-introduction-to-distributed-htc-and-overlay-systems">Tuesday Morning: Introduction to Distributed HTC and Overlay Systems<a class="headerlink" href="#tuesday-morning-introduction-to-distributed-htc-and-overlay-systems" title="Permanent link">&para;</a></h3>
@@ -181,8 +179,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><a href="day4/part4-ex1-input/">Exercise 4.1: Using a local shared filesystem for large input files</a></li>
 <li><a href="day4/part4-ex2-output/">Exercise 4.2: Using a local shared filesystem for large output files</a></li>
 </ul>
-<p>The submit host <code>user-training.osgconnect.net</code> will be active for about two weeks.  For long term use, please
-<a href="connect/">sign up for OSG Connect</a>.
+<p>The submit host <code>training.osgconnect.net</code> will be active for about two weeks.  For long term use, please
+<a href="https://osgconnect.net/">sign up for OSG Connect</a>.
 If you have any questions about the signup process, please email
 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#117;&#115;&#101;&#114;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#117;&#115;&#101;&#114;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a></p>
 <h2 id="friday">Friday<a class="headerlink" href="#friday" title="Permanent link">&para;</a></h2>
@@ -200,18 +198,19 @@ If you have any questions about the signup process, please email
 <li><a href="day5/part2-ex2-workflow-tuning/">Bonus Exercise 1.4: Further Optimization and Scaling</a></li>
 </ul>
 <h3 id="friday-afternoon-htc-showcase">Friday Afternoon: HTC Showcase<a class="headerlink" href="#friday-afternoon-htc-showcase" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Talk: <a href="http://directory.engr.wisc.edu/mse/faculty/morgan_dane">Dane Morgan</a>, Engineering:
-  <em>HTC for Engineering Better Materials</em> (<a href="../materials/day5/files/osgus18-day5-part3-showcase1-dmorgan.pdf">PDF</a>)</li>
-<li>Talk: <a href="https://payseur.genetics.wisc.edu/member.html">Megan Frayer</a>, Genetics:
-  <em>Using HTC in Genomic Ancestry Analysis</em> (<a href="../materials/day5/files/osgus18-day5-part3-showcase2-mfrayer.pdf">PDF</a>)</li>
-<li>Talk: <a href="https://www.math.wisc.edu/~boston/">William Cocke</a>, Mathematics:
-  <em>Building a Character Table Database: A Use of Condor in Pure Math</em>
-  (<a href="../materials/day5/files/osgus18-day5-part3-showcase3-wcocke.pdf">PDF</a>)</li>
-<li>Talk: <a href="http://www.botany.wisc.edu/spalding.htm">Edgar Spalding</a>, Botany:
-  <em>HTC As a Tool to Study How Plant Genomes Function</em>
-  (<a href="../materials/day5/files/osgus18-day5-part3-showcase4-espalding.pdf">PDF</a>)</li>
-</ul>
+<!--
+- Talk: <a href="http://directory.engr.wisc.edu/mse/faculty/morgan_dane">Dane Morgan</a>, Engineering:
+  *HTC for Engineering Better Materials* (<a href="/materials/day5/files/osgus18-day5-part3-showcase1-dmorgan.pdf">PDF</a>)
+- Talk: <a href="https://payseur.genetics.wisc.edu/member.html">Megan Frayer</a>, Genetics:
+  *Using HTC in Genomic Ancestry Analysis* (<a href="/materials/day5/files/osgus18-day5-part3-showcase2-mfrayer.pdf">PDF</a>)
+- Talk: <a href="https://www.math.wisc.edu/~boston/">William Cocke</a>, Mathematics:
+  *Building a Character Table Database: A Use of Condor in Pure Math*
+  (<a href="/materials/day5/files/osgus18-day5-part3-showcase3-wcocke.pdf">PDF</a>)
+- Talk: <a href="http://www.botany.wisc.edu/spalding.htm">Edgar Spalding</a>, Botany:
+  *HTC As a Tool to Study How Plant Genomes Function*
+  (<a href="/materials/day5/files/osgus18-day5-part3-showcase4-espalding.pdf">PDF</a>)
+-->
+
 <h3 id="friday-afternoon-foundations-of-htc">Friday Afternoon: Foundations of HTC<a class="headerlink" href="#friday-afternoon-foundations-of-htc" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Lecture: The Principles of HTC (<a href="../materials/day5/files/osgus18-day5-part4-htc-principles.pdf">PDF</a>)</li>
@@ -227,12 +226,12 @@ If you have any questions about the signup process, please email
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="connect/" class="btn btn-xs btn-default pull-right">
+      <a href="day1/part1-ex1-login/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="connect/" class="btn btn-xs btn-link">
-        Sign-up for OSG Connect
+      <a href="day1/part1-ex1-login/" class="btn btn-xs btn-link">
+        Exercise 1.1
       </a>
     </div>
     

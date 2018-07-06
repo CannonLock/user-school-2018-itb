@@ -62,22 +62,22 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
 
 <h1 id="monday-exercise-12-experiment-with-basic-htcondor-commands">Monday Exercise 1.2: Experiment With Basic HTCondor Commands<a class="headerlink" href="#monday-exercise-12-experiment-with-basic-htcondor-commands" title="Permanent link">&para;</a></h1>
-<p>The goal of this exercise is to use the basic informational HTCondor commands, <code>condor_status</code> and <code>condor_q</code>. They will be useful for monitoring your jobs and available slots throughout the day.</p>
+<p>The goal of this exercise is to use the basic informational HTCondor commands, <code>condor_q</code> and <code>condor_status</code>. They will be useful for monitoring your jobs and available slots (respectively) throughout the week.</p>
 <p>This exercise should take only a few minutes.</p>
 <h2 id="viewing-slots">Viewing Slots<a class="headerlink" href="#viewing-slots" title="Permanent link">&para;</a></h2>
 <p>As discussed in the lecture, the <code>condor_status</code> command is used to view the current state of slots in an HTCondor pool.</p>
 <p>At its most basic, the command is very simple:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;condor_status&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_status
 </pre></div>
 
 
-<p>This command, running on our (CHTC) pool, will produce a lot of output; there is one line per slot, and we typically have over 10,000 slots. TIP: You can widen your terminal window, which may help you to see all details of the output better.</p>
-<p>Here is some example output (what you see will be longer):</p>
+<p>This command, running on our (CHTC) pool, will produce a lot of output; there is one line per slot, and we typically have over 10,000 slots. <strong>TIP: You can widen your terminal window, which may help you to see all details of the output better.</strong></p>
+<p><em>Here is some example output (what you see will be longer):</em></p>
 <div class="codehilite"><pre><span></span><span class="go">slot1_31@e437.chtc.wisc.edu        LINUX      X86_64 Unclaimed Idle      0.000 8053  0+01:14:34</span>
 <span class="go">slot1_32@e437.chtc.wisc.edu        LINUX      X86_64 Unclaimed Idle      0.000 8053  0+03:57:00</span>
 <span class="go">slot1_33@e437.chtc.wisc.edu        LINUX      X86_64 Unclaimed Idle      0.000 8053  1+00:05:17</span>
 <span class="go">slot1@e438.chtc.wisc.edu           LINUX      X86_64 Owner     Idle      0.300  250  7+03:22:21</span>
-<span class="go">&lt;em&gt;slot1_1@e438.chtc.wisc.edu         LINUX      X86_64 Claimed   Busy      0.930 1024  0+02:42:08&lt;/em&gt;</span>
+<span class="go">slot1_1@e438.chtc.wisc.edu         LINUX      X86_64 Claimed   Busy      0.930 1024  0+02:42:08</span>
 <span class="go">slot1_2@e438.chtc.wisc.edu         LINUX      X86_64 Claimed   Busy      3.530 1024  0+02:40:24</span>
 </pre></div>
 
@@ -95,7 +95,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <tr>
 <td align="left">Name</td>
 <td align="left"><code>slot1_1@e438.chtc.wisc.edu</code></td>
-<td align="left">Slot name and hostname</td>
+<td align="left">Full slot name (including the hostname)</td>
 </tr>
 <tr>
 <td align="left">OpSys</td>
@@ -105,7 +105,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <tr>
 <td align="left">Arch</td>
 <td align="left"><code>X86_64</code></td>
-<td align="left">Machine architecture (e.g., Intel 64 bit)</td>
+<td align="left">Slot architecture (e.g., Intel 64 bit)</td>
 </tr>
 <tr>
 <td align="left">State</td>
@@ -144,43 +144,29 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </pre></div>
 
 
-<p>There is one row of summary for each machine architecture/operating system combination. The columns are the different states that a slot can be in. The final row gives a summary of slot states for the whole pool.</p>
-<p><strong>Questions:</strong></p>
+<p>There is one row of summary for each machine (i.e. "slot") architecture/operating system combination with columns for the number of slots in each state. The final row gives a summary of slot states for the whole pool.</p>
+<h3 id="questions">Questions:<a class="headerlink" href="#questions" title="Permanent link">&para;</a></h3>
 <ul>
-<li>For the sample above, how many 64-bit Linux slots are available? (Hint: Unclaimed = available.)</li>
-<li>For the sample above, how many slots total are being used by their owner?</li>
-</ul>
-<p>Now, run <code>condor_status</code> yourself and try these:</p>
-<ul>
-<li>How many 64-bit Linux slots are in the pool right now? How does that compare to the sample above?</li>
-<li>How many of those 64-bit Linux slots are available now?</li>
+<li>When you run <code>condor_status</code>, how many 64-bit Linux slots are available? (Hint: Unclaimed = available.)</li>
+<li>What percent of the total slots are currently claimed by a job? (Note: there is a rapid turnover of slots, which is what allows users with new submission to have jobs start quickly.)</li>
+<li>How have these numbers changed (if at all) when you run the command again?</li>
 </ul>
 <h3 id="viewing-whole-machines-only">Viewing Whole Machines, Only<a class="headerlink" href="#viewing-whole-machines-only" title="Permanent link">&para;</a></h3>
-<p>Also try out the <code>-compact</code> for a slightly different view of whole machines, without the individual slots shown.</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;condor_status -compact&lt;/strong&gt;
+<p>Also try out the <code>-compact</code> for a slightly different view of whole machines (i.e. server hostnames), without the individual slots shown.</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_status -compact
 </pre></div>
 
 
-<p>How has the column information changed? (Below is an example of the top of the output.)</p>
-<div class="codehilite"><pre><span></span><span class="go">Machine                      Platform     Slots Cpus Gpus  TotalGb FreCpu  FreeGb  CpuLoad ST Jobs/Min MaxSlotGb</span>
-
-<span class="go">aci-005.chtc.wisc.edu        x64/SL6         16   16         58.86      0     1.29    1.00 Cb     0.00     12.00</span>
-<span class="go">aci-017.chtc.wisc.edu        x64/SL6         14   16         58.86      2     2.86    0.88 **     0.00      4.00</span>
-<span class="go">aci-056.chtc.wisc.edu        x64/SL6          7   16         58.86      9     0.86    0.42 **     0.05     12.00</span>
-<span class="go">aci-057.chtc.wisc.edu        x64/SL6          6   16         58.82     10     2.82    0.39 **     0.00     12.00</span>
-<span class="go">aci-058.chtc.wisc.edu        x64/SL6          6   16         58.86     10     2.86    0.38 **     0.00     12.00</span>
-</pre></div>
-
-
+<p><strong>How has the column information changed?</strong></p>
 <h2 id="viewing-jobs">Viewing Jobs<a class="headerlink" href="#viewing-jobs" title="Permanent link">&para;</a></h2>
-<p>The <code>condor_q</code> command lists jobs that are on this submit machine and that are running or waiting to run. The <code>_q</code> part of the name is meant to suggest the word “queue”, or list of jobs <em>waiting</em> to finish.</p>
+<p>The <code>condor_q</code> command lists jobs that are on this submit machine and that are running or waiting to run. The <code>_q</code> part of the name is meant to suggest the word “queue”, or list of job sets <em>waiting</em> to finish.</p>
 <h3 id="viewing-your-own-jobs">Viewing Your Own Jobs<a class="headerlink" href="#viewing-your-own-jobs" title="Permanent link">&para;</a></h3>
 <p>The simplest form of the command lists only your jobs:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;condor_q&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_q
 </pre></div>
 
 
-<p>The main part of the output (which will be empty, because you haven't submitted jobs yet) shows one job ID per line:</p>
+<p>The main part of the output (which will be empty, because you haven't submitted jobs yet) shows one set ("batch") of submitted jobs per line. If you had a single job in the queue, it would look something like the below:</p>
 <div class="codehilite"><pre><span></span><span class="go">-- Schedd: learn.chtc.wisc.edu : &lt;128.104.100.43:9618?... @ 07/16/17 09:02:31</span>
 <span class="go">OWNER  BATCH_NAME            SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS</span>
 <span class="go">aapohl CMD: run_ffmpeg.sh   7/17 09:58      _      _      1      1 18801.0               </span>
@@ -205,7 +191,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <tr>
 <td align="left">BATCH_NAME</td>
 <td align="left"><code>run_ffmpeg.sh</code></td>
-<td align="left">The executable or the "jobbatchname" specified within submit file(s)</td>
+<td align="left">The executable or "jobbatchname" specified within the submit file(s)</td>
 </tr>
 <tr>
 <td align="left">SUBMITTED</td>
@@ -257,22 +243,21 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </ul>
 <h3 id="viewing-everyones-jobs">Viewing Everyone’s Jobs<a class="headerlink" href="#viewing-everyones-jobs" title="Permanent link">&para;</a></h3>
 <p>By default, the <code>condor_q</code> command shows <strong>your</strong> jobs only. To see everyone’s jobs that are queued on the machine, add the <code>-all</code> option:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;condor_q -all&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_q -all
 </pre></div>
 
 
-<p>Run that command now and use its output to answer the following questions:</p>
 <ul>
 <li>How many jobs are queued in total (i.e., running or waiting to run)?</li>
 <li>How many jobs from this submit machine are running right now?</li>
 </ul>
 <h3 id="viewing-jobs-without-the-default-batch-mode">Viewing Jobs without the Default "batch" Mode<a class="headerlink" href="#viewing-jobs-without-the-default-batch-mode" title="Permanent link">&para;</a></h3>
-<p>The <code>condor_q</code> output, by default, groups "batches" of jobs together (if they were submitted with the same submit file as part of the same Cluster, and even for separately submitted Clusters that use the same exact executable). To see more information for EVERY job on a separate line of output, use <code>condor_q -nobatch</code> (or, to see everyone's jobs <code>condor_q -all -nobatch</code>).</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;condor_q -all -nobatch&lt;/strong&gt;
+<p>The <code>condor_q</code> output, by default, groups "batches" of jobs together (if they were submitted with the same submit file or "jobbatchname"). To see more information for EVERY job on a separate line of output, use the <code>-nobatch</code> option to <code>condor_q</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_q -all -nobatch
 </pre></div>
 
 
-<p>How has the column information changed? (Below is an example of the top of the output.)</p>
+<p><strong>How has the column information changed?</strong> (Below is an example of the top of the output.)</p>
 <div class="codehilite"><pre><span></span><span class="go">-- Schedd: learn.chtc.wisc.edu : &lt;128.104.100.43:9618?... @ 07/17/17 09:58:44</span>
 <span class="go"> ID       OWNER            SUBMITTED     RUN_TIME ST PRI SIZE   CMD</span>
 <span class="go">18203.0   s16_alirezakho  7/27 09:51   0+00:00:00 I  0      0.7 pascal</span>
@@ -335,9 +320,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<p>In future exercises, you'll want to switch between <code>condor_q</code> and <code>condor_q -nobatch</code> to see different types of information about YOUR jobs.</p>
+<p><strong>In future exercises, you'll want to switch between <code>condor_q</code> and <code>condor_q -nobatch</code> to see different types of information about YOUR jobs.</strong></p>
 <h2 id="extra-information">Extra Information<a class="headerlink" href="#extra-information" title="Permanent link">&para;</a></h2>
-<p>Both <code>condor_status</code> and <code>condor_q</code> have many command-line options, some of which significantly change their output. You will explore a few of the most useful options in the next lecture and set of exercises, but if you want to experiment now, go ahead! There are a few ways to learn more about the commands:</p>
+<p>Both <code>condor_status</code> and <code>condor_q</code> have many command-line options, some of which significantly change their output. You will explore a few of the most useful options today and tomorrow, but if you want to experiment now, go ahead! There are a few ways to learn more about the commands:</p>
 <ul>
 <li>Use the (brief) built-in help for the commands, e.g.: <code>condor_q -h</code></li>
 <li>Read the installed man(ual) pages for the commands, e.g.: <code>man condor_q</code></li>

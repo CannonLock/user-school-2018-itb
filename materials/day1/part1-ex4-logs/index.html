@@ -62,10 +62,13 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
 
 <h1 id="monday-exercise-14-read-and-interpret-log-files">Monday Exercise 1.4: Read and Interpret Log Files<a class="headerlink" href="#monday-exercise-14-read-and-interpret-log-files" title="Permanent link">&para;</a></h1>
-<p>The goal of this exercise is quite simple: Learn to understand the contents of a job log file. When things go wrong with your job, it is usually the first place you should look for important messages. Plus, there is other useful information there.</p>
-<p>This exercise is short. If you do not have time for it now, come back and visit it later.</p>
+<p>The goal of this exercise is quite simple: 
+Learn to understand the contents of a job log file, which is where HTCondor describes the steps 
+taken to run your job.
+When things go wrong with your job, the log is the best place to look for first pointers (in addition to the .err file).</p>
+<p>This exercise is short, but you'll want to at least read over it before moving on (and come back later, if you can't run through it now).</p>
 <h2 id="reading-a-log-file">Reading a Log File<a class="headerlink" href="#reading-a-log-file" title="Permanent link">&para;</a></h2>
-<p>For this exercise, we can reuse any previous job that you have run. The example output below is based on the <code>sleep 60</code> job.</p>
+<p>For this exercise, we can examoine a log file for any previous job that you have run. The example output below is based on the <code>sleep 60</code> job.</p>
 <p>A job log file is updated throughout the life of a job, usually at key events. Each event starts with a heading that indicates what happened and when. Here are <strong>all</strong> of the event headings from the <code>sleep</code> job log (detailed output in between headings has been omitted here):</p>
 <div class="codehilite"><pre><span></span>000 (5739.000.000) 07/25 10:44:20 Job submitted from host: &lt;128.104.100.43:9618?addrs=...&gt;
 001 (5739.000.000) 07/25 10:45:11 Job executing on host: &lt;128.104.55.42:9618?addrs=...&gt;
@@ -105,7 +108,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </pre></div>
 
 
-<p>These updates record the amount of memory that the job is using on the execute machine. This can be helpful information, so that in future runs of the job, you can tell HTCondor how much memory you will need. More on that topic in the next lecture.</p>
+<p>These updates record the amount of memory that the job is using on the execute machine. This can be helpful information, so that in future runs of the job, you can tell HTCondor how much memory you will need.</p>
 <p>The job termination event includes a great deal of additional information:</p>
 <div class="codehilite"><pre><span></span>005 (5739.000.000) 07/25 10:46:11 Job terminated.
     (1) Normal termination (return value 0)
@@ -127,9 +130,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <p>Probably the most interesting information is:</p>
 <ul>
-<li>The <code>return value</code> (<code>0</code> here, which is success; non-zero usually means failure)</li>
+<li>The <code>return value</code> (<code>0</code> here, means the executable completed and didn't indicate any internal errors; non-zero usually means failure)</li>
 <li>The total number of bytes transferred each way, which could be useful if your network is slow</li>
-<li>The <code>Partitionable Resources</code> table, especially disk and memory usage — again, more on that in the next lecture</li>
+<li>The <code>Partitionable Resources</code> table, especially disk and memory usage, which will inform larger submissions.</li>
 </ul>
 <p>There are many other kinds of events, but the ones above will occur in almost every job log.</p>
 <h2 id="understanding-when-job-log-events-are-written">Understanding When Job Log Events Are Written<a class="headerlink" href="#understanding-when-job-log-events-are-written" title="Permanent link">&para;</a></h2>
@@ -138,8 +141,16 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Change the <code>sleep</code> job submit file, so that the job sleeps for 2 minutes (= 120 seconds)</li>
 <li>Submit the updated sleep job</li>
 <li>As soon as the <code>condor_submit</code> command finishes, hit the return key a few times, to create some blank lines</li>
-<li>Right away, run a command to show the log file and <strong>keep showing</strong> updates as they occur:\ <pre class="screen"><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>tail -f *sleep.log</strong>*</pre>\ <p>Be sure to use the correct filename for your log file, as named in your submit file.</p></li>
-<li>Watch the output carefully. When do events appear in the log file?</li>
+<li>
+<p>Right away, run a command to show the log file and <strong>keep showing</strong> updates as they occur:</p>
+<div class="codehilite"><pre><span></span><span class="go">username@learn tail -f sleep.log</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Watch the output carefully. When do events appear in the log file?</p>
+</li>
 <li>After the termination event appears, press Control-C to end the <code>tail</code> command and return to the shell prompt.</li>
 </ol>
 <h2 id="understanding-how-htcondor-writes-files">Understanding How HTCondor Writes Files<a class="headerlink" href="#understanding-how-htcondor-writes-files" title="Permanent link">&para;</a></h2>

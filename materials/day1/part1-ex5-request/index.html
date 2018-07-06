@@ -62,53 +62,71 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
 
 <h1 id="monday-exercise-15-declare-resource-needs">Monday Exercise 1.5: Declare Resource Needs<a class="headerlink" href="#monday-exercise-15-declare-resource-needs" title="Permanent link">&para;</a></h1>
-<p>The goal of this exercise is to demonstrate how to test and tune the <code>request_&lt;i&gt;X&lt;/i&gt;</code> statements in a submit file for when you don't know what resources your job needs.</p>
+<p>The goal of this exercise is to demonstrate how to test and tune the <code>request_X</code> statements in a submit file for when you don't know what resources your job needs.</p>
 <p>There are three special resource request statements that you can use (optionally) in an HTCondor submit file:</p>
-<p>* <code>request_cpus</code> for the number of CPUs your job will use (most softwares will take an argument to control this number, and it's usually otherwise "1") * <code>request_memory</code> for the maximum amount of run-time memory your job may use * <code>request_disk</code> for the maximum amount of disk space your job may use (including the executable and all other data that may show up during the job)</p>
-<p>HTCondor defaults to certain reasonable values for these request settings, so you do not need to use them to get <em>small</em> jobs to run. However, on some HTCondor pools, if your job goes over the request values, it may be removed from the execute machine and either held (awaiting action on your part) or rerun later. So it can be a disadvantage to you if you do not declare your resource needs or if you underestimate them. If you overestimate them, your jobs will match to fewer slots (and with a longer average wait time) <em>and</em> you'll be hogging up resources that you don't need, but that could be used for the jobs of other users. In the long run, it works better for all users of the pool if you declare what you really need.</p>
-<p>But how do you know what to request? In particular, we are concerned with memory and disk here; requesting multiple CPUs and using them is covered a bit in later school materials, but true HTC splits work up into jobs that each use as few CPU cores as possible (one CPU core is always best to have the most jobs running soonest).</p>
+<ul>
+<li><code>request_cpus</code> for the number of CPUs your job will use (most softwares will take an argument to control this number, and it's usually otherwise "1")</li>
+<li><code>request_memory</code> for the maximum amount of run-time memory your job may use</li>
+<li><code>request_disk</code> for the maximum amount of disk space your job may use (including the executable and all other data that may show up during the job)</li>
+</ul>
+<p>HTCondor defaults to certain reasonable values for these request settings, so you do not need to use them to get <em>small</em> jobs to run. 
+However, it is in <strong>YOUR</strong> best interest to always estimate resource requests before submitting any job, but to definitely tune your requests before submitting multiple jobs. In many HTCondor pools:</p>
+<ul>
+<li>If your job goes over the request values, it may be removed from the execute machine and held (status 'H' in the <code>condor_q</code> output, awaiting action on your part) without saving any partial job output files. So it is a disadvantage to not declare your resource needs or if you underestimate them. </li>
+<li>Conversely, if you overestimate them by too much, your jobs will match to fewer slots (and with a longer average wait time) <em>and</em> you'll be hogging up resources that you don't need, but that could be used for the jobs of other users. In the long run, it works better for all users of the pool if you declare what you really need.</li>
+</ul>
+<p>But how do you know what to request? In particular, we are concerned with memory and disk here; requesting multiple CPUs and using them is covered a bit in later school materials, but true HTC splits work up into jobs that each use as few CPU cores as possible (one CPU core is always best to have the most jobs running and completing soonest).</p>
 <h2 id="determining-resource-needs-before-running-any-jobs">Determining Resource Needs Before Running Any Jobs<a class="headerlink" href="#determining-resource-needs-before-running-any-jobs" title="Permanent link">&para;</a></h2>
-<p>It can be very difficult to determine the memory needs of your running program. Typically, the memory size of a job changes over time, making the task even trickier. If you have knowledge ahead of time about your job’s maximum memory needs, use that, or a maybe a number that's just a bit higher, to be safe. If not, then it's best to run your program in a single test job, first, and let HTCondor tell you in the log file (or in the <code>condor_q -nobatch</code> output, if you're able to watch it), which is covered in the next section on "Determining Resource Needs by Running Test Jobs".</p>
-<h3 id="running-a-job-locally-on-our-shared-submit-server-learnchtcwiscedu-you-should-not-run-computationally-intensive-work-because-it-can-use-resources-needed-by-htcondor-to-manage-the-queue-for-all-uses-however-you-may-have-access-to-other-computers-where-you-can-observe-the-memory-usage-of-a-program-the-downside-is-that-youll-have-to-watch-a-program-run-for-essentially-the-entire-time-to-make-sure-you-catch-the-maximum-memory-usage">Running a Job Locally On our shared submit server <code>learn.chtc.wisc.edu</code>, you should not run computationally-intensive work because it can use resources needed by HTCondor to manage the queue for all uses. However, you may have access to other computers where you can observe the memory usage of a program. The downside is that you'll have to watch a program run for essentially the entire time, to make sure you catch the maximum memory usage.<a class="headerlink" href="#running-a-job-locally-on-our-shared-submit-server-learnchtcwiscedu-you-should-not-run-computationally-intensive-work-because-it-can-use-resources-needed-by-htcondor-to-manage-the-queue-for-all-uses-however-you-may-have-access-to-other-computers-where-you-can-observe-the-memory-usage-of-a-program-the-downside-is-that-youll-have-to-watch-a-program-run-for-essentially-the-entire-time-to-make-sure-you-catch-the-maximum-memory-usage" title="Permanent link">&para;</a></h3>
-<p>For Memory: On Mac and Windows, for example, the "Activity Monitor" and "Task Manager" applications may be useful. On a Mac or Linux system, you can use the <code>ps</code> command or the <code>top</code> command in the Terminal to watch a running program and see (roughly) how much memory it is using. Full coverage of these tools is beyond the scope of this exercise, but here are two quick examples:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are running short on time, you can skip to "Determining Resource Needs By Running Test Jobs", below, but try to come back and read over this part at some point.</p>
+</div>
+<p>It can be very difficult to predict the memory needs of your running program without just running tests. Typically, the memory size of a job changes over time, making the task even trickier. 
+If you have knowledge ahead of time about your job’s maximum memory needs, use that, or a maybe a number that's just a bit higher, to be safe. Worst case scenario, you can request a fairly large amount of memory (as high as what's on your laptop or other server, if you know your program can run without crashing) for a first test job, OR you can run the program locally and 'watch' it:</p>
+<h3 id="examining-a-running-program-on-a-local-computer">Examining a Running Program on a Local Computer<a class="headerlink" href="#examining-a-running-program-on-a-local-computer" title="Permanent link">&para;</a></h3>
+<p>When working on a shared submit server, you should not run computationally-intensive work because it can use resources needed by HTCondor to manage the queue for all uses. 
+However, you may have access to other computers (your laptop, for example, or another server) where you can observe the memory usage of a program. The downside is that you'll have to watch a program run for essentially the entire time, to make sure you catch the maximum memory usage.</p>
+<h4 id="for-memory">For Memory:<a class="headerlink" href="#for-memory" title="Permanent link">&para;</a></h4>
+<p>On Mac and Windows, for example, the "Activity Monitor" and "Task Manager" applications may be useful. On a Mac or Linux system, you can use the <code>ps</code> command or the <code>top</code> command in the Terminal to watch a running program and see (roughly) how much memory it is using. Full coverage of these tools is beyond the scope of this exercise, but here are two quick examples:</p>
 <p>Using <code>ps</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;ps ux&lt;/strong&gt;
-<span class="go">USER       PID %CPU %MEM    VSZ   &lt;em&gt;RSS&lt;/em&gt; TTY      STAT START   TIME COMMAND</span>
-<span class="go">cat      24342  0.0  0.0  90224  &lt;em&gt;1864&lt;/em&gt; ?        S    13:39   0:00 sshd: cat@pts/0  </span>
-<span class="go">cat      24343  0.0  0.0  66096  &lt;em&gt;1580&lt;/em&gt; pts/0    Ss   13:39   0:00 -bash</span>
-<span class="go">cat      25864  0.0  0.0  65624   &lt;em&gt;996&lt;/em&gt; pts/0    R+   13:52   0:00 ps ux</span>
-<span class="go">cat      30052  0.0  0.0  90720  &lt;em&gt;2456&lt;/em&gt; ?        S    Jun22   0:00 sshd: cat@pts/2  </span>
-<span class="go">cat      30053  0.0  0.0  66096  &lt;em&gt;1624&lt;/em&gt; pts/2    Ss+  Jun22   0:00 -bash</span>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> ps ux
+<span class="go">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span>
+<span class="go">cat      24342  0.0  0.0  90224  1864 ?        S    13:39   0:00 sshd: cat@pts/0  </span>
+<span class="go">cat      24343  0.0  0.0  66096  1580 pts/0    Ss   13:39   0:00 -bash</span>
+<span class="go">cat      25864  0.0  0.0  65624   996 pts/0    R+   13:52   0:00 ps ux</span>
+<span class="go">cat      30052  0.0  0.0  90720  2456 ?        S    Jun22   0:00 sshd: cat@pts/2  </span>
+<span class="go">cat      30053  0.0  0.0  66096  1624 pts/2    Ss+  Jun22   0:00 -bash</span>
 </pre></div>
 
 
 <p>The Resident Set Size (<code>RSS</code>) column, highlighted above, gives a rough indication of the memory usage (in KB) of each running process. If your program runs long enough, you can run this command several times and note the greatest value.</p>
 <p>Using <code>top</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;top -u &lt;em&gt;userid&lt;/em&gt;&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> top -u <span style="color:red">username</span>
 <span class="go">top - 13:55:31 up 11 days, 20:59,  5 users,  load average: 0.12, 0.12, 0.09</span>
 <span class="go">Tasks: 198 total,   1 running, 197 sleeping,   0 stopped,   0 zombie</span>
 <span class="go">Cpu(s):  1.2%us,  0.1%sy,  0.0%ni, 98.5%id,  0.2%wa,  0.0%hi,  0.1%si,  0.0%st</span>
 <span class="go">Mem:   4001440k total,  3558028k used,   443412k free,   258568k buffers</span>
 <span class="go">Swap:  4194296k total,      148k used,  4194148k free,  2960760k cached</span>
 
-<span class="go">  PID USER      PR  NI  VIRT  &lt;em&gt;RES&lt;/em&gt;  SHR S %CPU %MEM    TIME+  COMMAND</span>
-<span class="go">24342 cat       15   0 90224 &lt;em&gt;1864&lt;/em&gt; 1096 S  0.0  0.0   0:00.26 sshd</span>
-<span class="go">24343 cat       15   0 66096 &lt;em&gt;1580&lt;/em&gt; 1232 S  0.0  0.0   0:00.07 bash</span>
-<span class="go">25927 cat       15   0 12760 &lt;em&gt;1196&lt;/em&gt;  836 R  0.0  0.0   0:00.01 top</span>
-<span class="go">30052 cat       16   0 90720 &lt;em&gt;2456&lt;/em&gt; 1112 S  0.0  0.1   0:00.69 sshd</span>
-<span class="go">30053 cat       18   0 66096 &lt;em&gt;1624&lt;/em&gt; 1236 S  0.0  0.0   0:00.37 bash</span>
+<span class="go">  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND</span>
+<span class="go">24342 cat       15   0 90224 1864 1096 S  0.0  0.0   0:00.26 sshd</span>
+<span class="go">24343 cat       15   0 66096 1580 1232 S  0.0  0.0   0:00.07 bash</span>
+<span class="go">25927 cat       15   0 12760 1196  836 R  0.0  0.0   0:00.01 top</span>
+<span class="go">30052 cat       16   0 90720 2456 1112 S  0.0  0.1   0:00.69 sshd</span>
+<span class="go">30053 cat       18   0 66096 1624 1236 S  0.0  0.0   0:00.37 bash</span>
 </pre></div>
 
 
 <p>The <code>top</code> command (shown here with an option to limit the output to a single user ID) also shows information about running processes, but updates periodically by itself. Type the letter <code>q</code> to quit the interactive display. Again, the highlighted <code>RES</code> column shows an approximation of memory usage.</p>
-<p>For Disk: Determining disk needs may be a bit simpler, because you can check on the size of files that a program is using while it runs. However, it is important to count all files that HTCondor counts to get an accurate size. HTCondor counts <strong>everything</strong> in your job sandbox toward your job’s disk usage:</p>
+<h4 id="for-disk">For Disk:<a class="headerlink" href="#for-disk" title="Permanent link">&para;</a></h4>
+<p>Determining disk needs may be a bit simpler, because you can check on the size of files that a program is using while it runs. However, it is important to count all files that HTCondor counts to get an accurate size. HTCondor counts <strong>everything</strong> in your job sandbox toward your job’s disk usage:</p>
 <ul>
 <li>The executable itself</li>
 <li>All "input" files (anything else that gets transferred TO the job, even if you don't think of it as "input")</li>
 <li>All files created during the job (broadly defined as "output"), including the captured standard output and error files that you list in the submit file.</li>
 <li>All temporary files created in the sandbox, even if they get deleted by the executable before it's done.</li>
 </ul>
-<p>If you can run your program within a single directory on a local computer (not on the submit server), you should be able to view files and their sizes with the <code>ls</code> command.</p>
+<p>If you can run your program within a single directory on a local computer (not on the submit server), you should be able to view files and their sizes with the <code>ls</code> and <code>du</code> commands.</p>
 <h2 id="determining-resource-needs-by-running-test-jobs-best">Determining Resource Needs By Running Test Jobs (BEST)<a class="headerlink" href="#determining-resource-needs-by-running-test-jobs-best" title="Permanent link">&para;</a></h2>
 <p>Despite the techniques mentioned above, by far the easiest approach to measuring your job’s resource needs is to run one or a small number of sample jobs and have HTCondor itself tell you about the resources used during the runs.</p>
 <p>For example, here is a strange Python script that does not do anything useful, but consumes some real resources while running:</p>
@@ -126,11 +144,13 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </pre></div>
 
 
-<p>Without trying to figure out what this code does or how many resources it uses, just create a submit file for it, and run it once with HTCondor, starting with somewhat high memory requests ("1GB" for memory and disk is a good starting point, unless you think the job will use far more, and will still match quickly). When it is done, examine the log file. In particular, we care about these lines:</p>
-<div class="codehilite"><pre><span></span>    Partitionable Resources :    <span class="nt">&lt;em&gt;</span>Usage<span class="nt">&lt;/em&gt;</span>  Request Allocated
+<p>Without trying to figure out what this code does or how many resources it uses, just create a submit file for it, 
+and run it once with HTCondor, starting with somewhat high memory requests ("1GB" for memory and disk is a good starting point, unless you think the job will use far more).
+When it is done, examine the log file. In particular, we care about these lines:</p>
+<div class="codehilite"><pre><span></span>    Partitionable Resources :    Usage  Request Allocated
        Cpus                 :                 1         1
-       Disk (<span class="nt">&lt;em&gt;</span>KB<span class="nt">&lt;/em&gt;</span>)            :     <span class="nt">&lt;em&gt;</span>6739<span class="nt">&lt;/em&gt;</span>  1048576   8022934
-       Memory (<span class="nt">&lt;em&gt;</span>MB<span class="nt">&lt;/em&gt;</span>)          :        <span class="nt">&lt;em&gt;</span>3<span class="nt">&lt;/em&gt;</span>     1024      1024
+       Disk (KB)            :     6739  1048576   8022934
+       Memory (MB)          :        3     1024      1024
 </pre></div>
 
 
@@ -149,8 +169,8 @@ request_disk = 7MB   <span class="nt">&lt;span</span> <span class="na">style=</s
 <li>Without explicit units, <code>request_disk</code> is in KB (kilobytes)</li>
 <li>Allowable units are <code>KB</code> (kilobytes), <code>MB</code> (megabytes), <code>GB</code> (gigabytes), and <code>TB</code> (terabytes)</li>
 </ul>
-<p>HTCondor translates these requirements into expressions that become part of the <code>requirements</code> expression. However, do not put your CPU, memory, and disk requirements directly into the <code>requirements</code> expression; use the <code>request_&lt;i&gt;XXX&lt;/i&gt;</code> statements instead.</p>
-<p>Add these requirements to your submit file for the Python script, rerun the job, and confirm in the log file that your requests were used.</p>
+<p>HTCondor translates these requirements into attributes that become part of the job's <code>requirements</code> expression. However, do not put your CPU, memory, and disk requirements directly into the <code>requirements</code> expression; use the <code>request_&lt;i&gt;XXX&lt;/i&gt;</code> statements instead.</p>
+<p><strong>If you still have time in this working session, Add these requirements to your submit file for the Python script, rerun the job, and confirm in the log file that your requests were used.</strong></p>
 
   <br>
     

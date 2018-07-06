@@ -38,7 +38,7 @@
         
         var pageToc = [
           {title: "Monday Exercise 1.6: Remove Jobs From the Queue", url: "#_top", children: [
-              {title: "Removing a Job From the Queue", url: "#removing-a-job-from-the-queue" },
+              {title: "Removing a Job or Cluster From the Queue", url: "#removing-a-job-or-cluster-from-the-queue" },
               {title: "Removing All of Your Jobs", url: "#removing-all-of-your-jobs" },
           ]},
         ];
@@ -62,34 +62,50 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <h1 id="monday-exercise-16-remove-jobs-from-the-queue">Monday Exercise 1.6: Remove Jobs From the Queue<a class="headerlink" href="#monday-exercise-16-remove-jobs-from-the-queue" title="Permanent link">&para;</a></h1>
 <p>The goal of this exercise is to show you how to remove jobs from the queue. This is helpful if you make a mistake, do not want to wait for a job to complete, or otherwise need to fix things. For example, if some test jobs go on hold for using too much memory or disk, you may want to just remove them, edit the submit files, and then submit again.</p>
-<p>NOTE: Please remember to remove any jobs from the queue that you have given up on. Otherwise, the queue will start to get very long with jobs that will waste resources (and decrease your priority), or that may never run (if they're on hold, or have other issues keeping them from matching).</p>
+<p><strong>Skip this exercise and come back to it if you are short on time, or until you need to remove jobs for other exercises</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please remember to remove any jobs from the queue that you have given up on. Otherwise, the queue will start to get very long with jobs that will waste resources (and decrease your priority), or that may never run (if they're on hold, or have other issues keeping them from matching).</p>
+</div>
 <p>This exercise is very short, but if you are out of time, you can come back to it later.</p>
-<h2 id="removing-a-job-from-the-queue">Removing a Job From the Queue<a class="headerlink" href="#removing-a-job-from-the-queue" title="Permanent link">&para;</a></h2>
+<h2 id="removing-a-job-or-cluster-from-the-queue">Removing a Job or Cluster From the Queue<a class="headerlink" href="#removing-a-job-or-cluster-from-the-queue" title="Permanent link">&para;</a></h2>
 <p>To practice removing jobs from the queue, you need a job in the queue!</p>
 <ol>
 <li>Submit a job from an earlier exercise</li>
 <li>Determine the job ID (<code>cluster.process</code>) from the <code>condor_submit</code> output or from <code>condor_q</code></li>
-<li>Remove the job:\ <pre class="screen"><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>condor_rm *job_id</strong>*</pre>\ <p>Use the full job ID this time, e.g., <code>5759.0</code>.</p></li>
-<li>Did the job leave the queue immediately? If not, about how long did it take?</li>
+<li>
+<p>Remove the job:</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">job_id</span>
+</pre></div>
+
+
+<p>Use the full job ID this time, e.g. <code>5759.0</code>.</p>
+</li>
+<li>
+<p>Did the job leave the queue immediately? If not, about how long did it take?</p>
+</li>
 </ol>
 <p>So far, we have created job clusters that contain only one job process (the <code>.0</code> part of the job ID). That will change soon, so it is good to know how to remove a specific job ID. However, it is possible to remove all jobs that are part of a cluster at once. Simply omit the job process (the <code>.0</code> part of the job ID) in the <code>condor_rm</code> command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;condor_rm &lt;em&gt;cluster&lt;/em&gt;&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">cluster</span>
 </pre></div>
 
 
 <p>Finally, you can include many job clusters and full job IDs in a single <code>condor_rm</code> command. For example:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;condor_rm <span class="m">5768</span> <span class="m">5769</span> <span class="m">5770</span>.0 <span class="m">5771</span>.2&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span class="m">5768</span> <span class="m">5769</span> <span class="m">5770</span>.0 <span class="m">5771</span>.2
 </pre></div>
 
 
 <h2 id="removing-all-of-your-jobs">Removing All of Your Jobs<a class="headerlink" href="#removing-all-of-your-jobs" title="Permanent link">&para;</a></h2>
-<p>If you really want to remove all of your jobs at once, you can do that.</p>
-<ol>
-<li>Quickly submit several jobs from past exercises</li>
-<li>View the jobs in the queue with <code>condor_q</code></li>
-<li>Remove them all at once\ <pre class="screen"><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>condor_rm *userid</strong>*</pre>\ <p>Use your login user ID for <code>userid</code>.</p></li>
-<li>Use <code>condor_q</code> to track progress</li>
-</ol>
+<p>If you really want to remove all of your jobs at once, you can do that with:</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">username</span>
+</pre></div>
+
+
+<p>If you want to test it: (optional, though you'll likely need this in the future)
+1.  Quickly submit several jobs from past exercises
+1.  View the jobs in the queue with <code>condor_q</code>
+1.  Remove them all with the above command
+1.  Use <code>condor_q</code> to track progress</p>
 <p>In case you are wondering, you can remove only your own jobs. HTCondor administrators can remove anyone’s jobs, so be nice to them.</p>
 
   <br>
@@ -103,7 +119,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
       <a href="../part1-ex7-compile/" class="btn btn-xs btn-link">
-        Exercise 1.7
+        Bonus Exercise 1.7
       </a>
     </div>
     
