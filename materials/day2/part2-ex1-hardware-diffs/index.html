@@ -107,7 +107,7 @@ parameter (<code>request_memory</code>) for each batch of jobs.</p>
 <li>If not already, log in to <code>learn.chtc.wisc.edu</code></li>
 <li>Create and change into a new subdirectory called <code>tuesday-2.1</code> – doing things this way will make Part 2 much easier</li>
 <li>
-<p>Create a submit file that is named <code>sleep.sub</code> that executes the command <code>/bin/sleep 60</code>.</p>
+<p>Create a submit file that is named <code>sleep.sub</code> that executes the command <code>/bin/sleep 300</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you do not remember all of the submit statements to write this file, or just to go faster, find a similar
@@ -116,8 +116,8 @@ Copy the file and rename it here, and make sure the argument to <code>sleep</cod
 </div>
 </li>
 <li>
-<p>Use the <code>queue in</code> syntax to submit 5 jobs each for the following memory requests: 2, 4, 8, 16, and 32 GB of memory.
-    You should have 5 jobs requesting 2GB, 5 jobs requesting 4GB, etc.</p>
+<p>Use the <code>queue in</code> syntax to submit 10 jobs each for the following memory requests: 4, 8, 16, 32, and 64 GB of memory.
+    You should have 10 jobs requesting 4GB, 10 jobs requesting 8GB, etc.</p>
 </li>
 <li>Save the submit file and exit your editor</li>
 <li>Submit your jobs</li>
@@ -143,33 +143,33 @@ Consider making a little table like the one below to track progress.</p>
 </thead>
 <tbody>
 <tr>
-<td align="left">2 GB</td>
-<td align="left">5</td>
-<td align="left">3</td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="left">4 GB</td>
-<td align="left">5</td>
-<td align="left">3</td>
+<td align="left">10</td>
+<td align="left">6</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">8 GB</td>
-<td align="left">5</td>
-<td align="left">4</td>
+<td align="left">10</td>
+<td align="left">7</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">16 GB</td>
-<td align="left">5</td>
-<td align="left">4</td>
+<td align="left">10</td>
+<td align="left">8</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">32 GB</td>
-<td align="left">5</td>
-<td align="left">5</td>
+<td align="left">10</td>
+<td align="left">9</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">64 GB</td>
+<td align="left">10</td>
+<td align="left">10</td>
 <td align="left"></td>
 </tr>
 </tbody>
