@@ -60,12 +60,56 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="tuesday-exercise-11-refresher-submitting-multiple-jobs">Tuesday Exercise 1.1: Refresher – Submitting Multiple Jobs<a class="headerlink" href="#tuesday-exercise-11-refresher-submitting-multiple-jobs" title="Permanent link">&para;</a></h1>
-<p>The goal of this exercise is to map the physical locations of some worker nodes in our local cluster. To do this, you will write a simple submit file that will queue multiple jobs and then manually collate the results.</p>
+<p>The goal of this exercise is to map the physical locations of some worker nodes in our local cluster.
+To do this, you will write a simple submit file that will queue multiple jobs and then manually collate the results.</p>
 <h2 id="where-in-the-world-are-my-jobs">Where in the world are my jobs?<a class="headerlink" href="#where-in-the-world-are-my-jobs" title="Permanent link">&para;</a></h2>
-<p>To find the physical location of the computers your jobs our running on, you will use a method called <em>geolocation</em>. Geolocation uses a registry to match a computer’s network address to an approximate latitude and longitude.</p>
+<p>To find the physical location of the computers your jobs our running on, you will use a method called <em>geolocation</em>.
+Geolocation uses a registry to match a computer’s network address to an approximate latitude and longitude.</p>
 <h3 id="geolocation-code">Geolocation code<a class="headerlink" href="#geolocation-code" title="Permanent link">&para;</a></h3>
-<p>Below is a Python script that geolocates the machine that it is running on, returning <a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system">latitude and longitude coordinates</a>. It is not important to understand how the internals of the script works.</p>
-<div class="codehilite"><pre><span></span><span class="ch">#!/bin/env python</span>
+<p>Below is a Python script that geolocates the machine that it is running on, returning
+<a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system">latitude and longitude coordinates</a>.
+It is not important to understand how the internals of the script works.
+When called without any arguments, the script will return the latitude and longitude coordinates of the machine from
+which it is run.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="ch">#!/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">socket</span>
@@ -105,32 +149,42 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">gaierror</span><span class="p">:</span>
         <span class="k">pass</span>
 </pre></div>
+</td></tr></table>
 
-
-<p>When called without any arguments, the above script will return the latitude and longitude coordinates of the machine that it is run on.</p>
 <h3 id="geolocating-several-machines">Geolocating several machines<a class="headerlink" href="#geolocating-several-machines" title="Permanent link">&para;</a></h3>
 <p>Now, let’s try to use this Python script and remember some basic HTCondor ideas from yesterday!</p>
 <ol>
-<li>Log on to <code>learn.chtc.wisc.edu</code></li>
+<li>Log in to <code>learn.chtc.wisc.edu</code></li>
 <li>Create and change into a new folder for this exercise, for example <code>tuesday-1.1</code></li>
 <li>Save the Python script above as a file named <code>location.py</code></li>
 <li>As always, ensure that your script has the proper permissions (hint: try running it from the command line)</li>
-<li>Create a submit file that generates ten jobs that run <code>location.py</code> and uses the <code>$(Process)</code> macro to write different <code>output</code> and <code>error</code> files. Try to do this step without looking at materials from yesterday. But if you are stuck, see <a href="../../day1/part2-ex4-queue-n/">yesterday’s exercise 2.4</a>.</li>
+<li>Create a submit file that generates <strong>ten</strong> jobs that run <code>location.py</code> and uses the <code>$(Process)</code> macro to write
+    different <code>output</code> and <code>error</code> files.
+    Try to do this step without looking at materials from yesterday.
+    But if you are stuck, see <a href="../../day1/part2-ex4-queue-n/">yesterday’s exercise 2.4</a>.</li>
 <li>Submit your jobs and wait for the results</li>
 </ol>
 <h3 id="collating-your-results">Collating your results<a class="headerlink" href="#collating-your-results" title="Permanent link">&para;</a></h3>
-<p>Now that you have your results, it's time to summarize them. Rather than inspecting each output file individually, you can use the <code>cat</code> command to print the results from all of your output files at once. If all of your output files have the format <code>location-#.out</code> (e.g., <code>location-10.out</code>), your command will look something like this:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;cat location-*.out&lt;/strong&gt;
+<p>Now that you have your results, it's time to summarize them.
+Rather than inspecting each output file individually, you can use the <code>cat</code> command to print the results from all of
+your output files at once.
+If all of your output files have the format <code>location-#.out</code> (e.g., <code>location-10.out</code>), your command will look something
+like this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> cat location-*.out
 </pre></div>
 
 
-<p>The <code>*</code> is a wildcard so the above cat command runs on all files that start with <code>location-</code> and end in <code>.out</code>. Additionally, you can use <code>cat</code> in tandem with the <code>sort</code> and <code>uniq</code> commands to print only the unique results:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;cat location-*.out <span class="p">|</span> sort <span class="p">|</span> uniq&lt;/strong&gt;
+<p>The <code>*</code> is a wildcard so the above cat command runs on all files that start with <code>location-</code> and end in <code>.out</code>.
+Additionally, you can use <code>cat</code> in tandem with the <code>sort</code> and <code>uniq</code> commands to print only the unique results:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> cat location-*.out <span class="p">|</span> sort <span class="p">|</span> uniq
 </pre></div>
 
 
 <h2 id="mapping-your-results">Mapping your results<a class="headerlink" href="#mapping-your-results" title="Permanent link">&para;</a></h2>
-<p>To visualize the locations of the machines that your jobs ran on, you will be using <a href="http://www.mapcustomizer.com/">http://www.mapcustomizer.com/</a>. Copy and paste the collated results into the text box that pops up when clicking on the 'Bulk Entry' button on the right-hand side. Are the results what you expected?</p>
+<p>To visualize the locations of the machines that your jobs ran on, you will be using <a href="http://www.mapcustomizer.com/">http://www.mapcustomizer.com/</a>.
+Copy and paste the collated results into the text box that pops up when clicking on the 'Bulk Entry' button on the
+right-hand side.
+Are the results what you expected?</p>
 <h2 id="next-exercise">Next exercise<a class="headerlink" href="#next-exercise" title="Permanent link">&para;</a></h2>
 <p>Once completed, move onto the next exercise: <a href="../part1-ex2-login-scp/">Logging in to the OSG Submit Machine</a></p>
 

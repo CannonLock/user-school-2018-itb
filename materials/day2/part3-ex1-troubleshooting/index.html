@@ -59,48 +59,62 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="tuesday-exercise-31-troubleshooting-a-dag">Tuesday Exercise 3.1: Troubleshooting a DAG<a class="headerlink" href="#tuesday-exercise-31-troubleshooting-a-dag" title="Permanent link">&para;</a></h1>
-<p>The goal of this exercise is to troubleshoot some common problems that you may encounter when submitting a DAG using HTCondor. This exercise will likely take you longer than the allotted one hour of time; don't fret, there is an answer key provided, so work at your own pace.</p>
+<p>The goal of this exercise is to troubleshoot some common problems that you may encounter when submitting a DAG using
+HTCondor.
+This exercise will likely take you longer than the allotted time; don't fret, there is an answer key provided, so you
+should work at your own pace.</p>
 <h2 id="part-1-acquiring-the-materials">Part 1: Acquiring the materials<a class="headerlink" href="#part-1-acquiring-the-materials" title="Permanent link">&para;</a></h2>
 <p>The materials for this exercise are located on our web server.</p>
 <ol>
 <li>Log into <code>learn.chtc.wisc.edu</code></li>
-<li>Use <code>wget</code> to retrieve the materials from the web server:\ <pre class="screen"><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>wget <a href="http://proxy.chtc.wisc.edu/SQUID/osgschool17/tues_31.tar.gz">http://proxy.chtc.wisc.edu/SQUID/osgschool17/tues_31.tar.gz</a></strong></pre></li>
-<li>Extract the tarball using the commands you learned earlier today</li>
+<li>
+<p>Use <code>wget</code> to retrieve the materials from the web server:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> wget http://proxy.chtc.wisc.edu/SQUID/osgschool18/tues_31.tar.gz
+</pre></div>
+
+
+</li>
+<li>
+<p>Extract the tarball using the commands you learned earlier today</p>
+</li>
 <li>Change into the directory extracted from the tarball and explore its contents</li>
 </ol>
-<p><code>anagram.dag</code> is the main DAG that you will be submitting and although it may look like a simple, linear DAG, it's actually more like the DAG from Monday's <a href="../../day1/part3-ex3-simple-dag/">exercise 4.2</a> because of the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.4/2_10DAGMan_Applications.html#SECTION003108900000000000000">SUBDAG</a> within it! There is only one <code>.dag</code> file in the extracted folder, so where does the SUBDAG come from?</p>
+<p><code>anagram.dag</code> is the main DAG that you will be submitting and although it may look like a simple, linear DAG, it's
+actually more like the DAG from Monday's <a href="../../day1/part3-ex3-simple-dag/">exercise 4.2</a> because of the
+<a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/2_10DAGMan_Applications.html#SECTION0031091100000000000000">SUBDAG</a>
+within it!
+There is only one <code>.dag</code> file in the extracted folder, so where does the <code>SUBDAG</code> come from?</p>
 <h2 id="part-2-finding-anagramic-squares">Part 2: Finding anagramic squares<a class="headerlink" href="#part-2-finding-anagramic-squares" title="Permanent link">&para;</a></h2>
-<p>The contents of the tarball that you've extracted contain a DAG that is designed to solve <a href="https://projecteuler.net/problem=98">Project Euler problem 98</a>:</p>
-<div class="codehilite"><pre><span></span>By replacing each of the letters in the word CARE with 1, 2, 9, and 6 respectively,
-we form a square number: 1296 = 36<span class="nt">&lt;sup&gt;</span>2<span class="nt">&lt;/sup&gt;</span>. What is remarkable is that, by using the
-same digital substitutions, the anagram, RACE, also forms a square number:
-9216 = 96<span class="nt">&lt;sup&gt;</span>2<span class="nt">&lt;/sup&gt;</span>. We shall call CARE (and RACE) a square anagram word pair and specify
-further that leading zeroes are not permitted, neither may a different letter have
-the same digital value as another letter.
-
-Using p098_words.txt, a 16K text file containing nearly two-thousand common English
-words, find all the square anagram word pairs (a palindromic word is NOT considered
-to be an anagram of itself).
-
-What is the largest square number formed by any member of such a pair?
-
-NOTE: All anagrams formed must be contained in the given text file.
+<p>The contents of the tarball that you've extracted contain a DAG that is designed to solve
+<a href="https://projecteuler.net/problem=98">Project Euler problem 98</a>:</p>
+<blockquote>
+<p>By replacing each of the letters in the word CARE with 1, 2, 9, and 6 respectively, we form a square number: 1296 =
+36^2. What is remarkable is that, by using the same digital substitutions, the anagram, RACE, also forms a square
+number: 9216 = 96^2. We shall call CARE (and RACE) a square anagram word pair and specify further that leading zeroes
+are not permitted, neither may a different letter have the same digital value as another letter.</p>
+<p>Using p098_words.txt, a 16K text file containing nearly two-thousand common English words, find all the square 
+anagram word pairs (a palindromic word is NOT considered to be an anagram of itself).</p>
+<p>What is the largest square number formed by any member of such a pair?</p>
+<p><strong>NOTE:</strong> All anagrams formed must be contained in the given text file.</p>
+</blockquote>
+<p>Unfortunately, there are many issues with the DAG and its submit files that you will have to work through before you can
+you can obtain the solution to the problem (the code itself should be bug-free)!
+Submit the DAG:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> condor_submit_dag anagrams.dag
 </pre></div>
 
 
-<p>Unfortunately, there are many issues with the DAG and its submit files that you will have to work through before you can you can obtain the solution to the problem (the code itself should be bug-free)! Submit the DAG:</p>
-<div class="codehilite"><pre><span></span><span class="go"> user@learn $ condor_submit_dag anagrams.dag</span>
-</pre></div>
-
-
-<p>Then use your newfound HTCondor troubleshooting knowledge to find the answer to the Euler problem that ends up in <code>result.out</code> when you've successfully completed this exercise.</p>
+<p>Then use your newfound HTCondor troubleshooting knowledge to find the answer to the Euler problem that ends up in
+<code>result.out</code> when you've successfully completed this exercise.</p>
 <h3 id="answer-key">Answer key<a class="headerlink" href="#answer-key" title="Permanent link">&para;</a></h3>
 <p>There is also a working solution on our web server that can be retrieved with</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;wget http://proxy.chtc.wisc.edu/SQUID/osgschool17/tues_31_answer.tar.gz&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> wget http://proxy.chtc.wisc.edu/SQUID/osgschool17/tues_31_answer.tar.gz
 </pre></div>
 
 
-<p>It contains comments labeled <code>SOLUTION</code> that you can consult in case you get stuck. Like any answer key, it's mainly useful as a verification tool, so try to only use it as a last resort or for additional illumination.</p>
+<p>It contains comments labeled <code>SOLUTION</code> that you can consult in case you get stuck.
+Like any answer key, it's mainly useful as a verification tool, so try to only use it as a last resort or for detailed
+explanations to improve your understanding.</p>
 
   <br>
     
