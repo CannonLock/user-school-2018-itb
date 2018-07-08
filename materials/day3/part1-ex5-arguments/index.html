@@ -59,7 +59,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
+    <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: #008; } </style>
 
 <h1 id="bonus-passing-arguments-through-the-wrapper-script">Bonus: Passing Arguments Through the Wrapper Script<a class="headerlink" href="#bonus-passing-arguments-through-the-wrapper-script" title="Permanent link">&para;</a></h1>
 <p>In this exercise, you will change the wrapper script and submit file from the previous exercise to use arguments.</p>
@@ -74,24 +74,23 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>In this example, some values we might want to change are the name of the input and output file. These will be the arguments for our script.</p>
 <h2 id="modifying-files">Modifying Files<a class="headerlink" href="#modifying-files" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Note the name of the input and output files and open the submit file. Add an arguments line if it doesn't already exist, and fill it with our two chosen arguments: the name of the input file and the name of the output file: \</li>
-</ol>
+<li>
+<p>Note the name of the input and output files and open the submit file. Add an arguments line if it doesn't already exist, and fill it with our two chosen arguments: the name of the input file and the name of the output file: </p>
 <div class="codehilite"><pre><span></span>arguments = input.txt results.txt
 </pre></div>
 
 
-<p>\</p>
-<ol>
-<li>Now go back to the wrapper script. Each scripting language (bash, perl, python, R, etc.) will have its own particular syntax \</li>
-</ol>
-<p>for capturing command line arguments. For bash (the language of our current wrapper script), the variables <code>$1</code> and <code>$2</code> represent \ the first and second arguments, respectively. (If our script needed three arguments, we would use <code>$3</code> for the third one). Thus, in \ the main command of the script, replace the file names with these variables: \</p>
+</li>
+<li>
+<p>Now go back to the wrapper script. Each scripting language (bash, perl, python, R, etc.) will have its own particular syntax for capturing command line arguments. For bash (the language of our current wrapper script), the variables <code>$1</code> and <code>$2</code> represent  the first and second arguments, respectively. (If our script needed three arguments, we would use <code>$3</code> for the third one). Thus, in  the main command of the script, replace the file names with these variables: </p>
 <div class="codehilite"><pre><span></span>OpenBUGS &lt; $1 &gt; $2
 </pre></div>
 
 
-<p>\</p>
-<ol>
-<li>Once these changes are made, submit your jobs with <code>condor_submit</code>. Use <code>condor_q -nobatch</code> to see what the job command looks like to HTCondor.</li>
+</li>
+<li>
+<p>Once these changes are made, submit your jobs with <code>condor_submit</code>. Use <code>condor_q -nobatch</code> to see what the job command looks like to HTCondor.</p>
+</li>
 </ol>
 
   <br>

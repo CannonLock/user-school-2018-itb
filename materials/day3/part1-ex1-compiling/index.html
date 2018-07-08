@@ -71,68 +71,100 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Our C code prints 7 rows of Pascal's triangle.</p>
 <ol>
 <li>Log into the OSG submit node <code>osg-learn.chtc.wisc.edu</code>. Create a directory for this exercise and <code>cd</code> into it.</li>
-<li>Copy and paste the following code into a file named <code>pascal.c</code>. \</li>
-</ol>
-<p>\</p>
-<div class="codehilite"><pre><span></span>#include &amp;ltstdio.h&amp;gt
+<li>Copy and paste the following code into a file named <code>pascal.c</code>.<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;stdio.h&quot;</span><span class="cp"></span>
 
-long factorial(int);
+<span class="kt">long</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
 
-int main()
-{
-   int i, n, c;
-   n=7;
-   for (i = 0; i &lt; n; i++){
-      for (c = 0; c &lt;= (n - i - 2); c++)
-         printf(&quot; &quot;);
-      for (c = 0 ; c &lt;= i; c++)
-         printf(&quot;%ld &quot;,factorial(i)/(factorial(c)*factorial(i-c)));
-      printf(&quot;\n&quot;);
-   }
-   return 0;
-}
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">;</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span>
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ld &quot;</span><span class="p">,</span><span class="n">factorial</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">factorial</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">c</span><span class="p">)));</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-long factorial(int n)
-{
-   int c;
-   long result = 1;
-   for (c = 1; c &lt;= n; c++)
-         result = result*c;
-   return result;
-}
+<span class="kt">long</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+   <span class="kt">long</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span>
+         <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 
+</li>
+</ol>
 <h2 id="compiling">Compiling<a class="headerlink" href="#compiling" title="Permanent link">&para;</a></h2>
 <p>In order to use this code in a job, we will first need to statically compile the code. Recall the slide from the lecture - where <em>can</em> we compile and where <em>should</em> we compile? In particular:</p>
 <ul>
 <li>Where is the compiler available?</li>
-<li>
-<p>How computationally intensive will this compilation be?</p>
-</li>
+<li>How computationally intensive will this compilation be?    </li>
+</ul>
+<!--hiding-->
+
+<ol>
 <li>
 <p>Think about these questions before moving on. Where do you think we should compile?</p>
 </li>
-</ul>
-<p>\ 2. Most linux servers (including our submit node) have the <code>gcc</code> (GNU compiler collection) installed, so we already have a compiler on the submit node. Furthermore, this is a simple piece of C code, so the compilation will not be computationally intensive. Thus, we should be able to compile directly on the submit node. \</p>
-<ol>
-<li>Compile the code, using the command: \ <pre class="screen"> <span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>gcc -static pascal.c -o pascal</strong> </pre>\ \ Note that we have added the <code>-static</code> option to make sure that the compiled binary includes the necessary libraries. This will allow the code to run on any Linux machine, no matter where those libraries are located. \ 4. Verify that the compiled binary was statically linked:\ <pre class="screen"><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>file pascal</strong></pre>\ <p>The Linux <code>file</code> command provides information about the <em>type</em> or <em>kind</em> of file that is given as an argument. In this case, you should get output like this:</p>\ <pre class="screen">pascal: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), <em>statically linked</em>, for GNU/Linux 2.6.18, not stripped</pre>\ <p>Note the highlighted part, which clearly states that this executable (software) is statically linked. The same command run on a non-statically linked executable file would include the text <code>dynamically linked (uses shared libs)</code> instead. So with this simple verification step, which could even be run on files that you did not compile yourself, you have some further reassurance that it is safe to use on other Linux machines. (Bonus exercise: Try the <code>file</code> command on lots of other files)</p></li>
+<li>
+<p>Most linux servers (including our submit node) have the <code>gcc</code> (GNU compiler collection) installed, so we already have a compiler on the submit node. Furthermore, this is a simple piece of C code, so the compilation will not be computationally intensive. Thus, we should be able to compile directly on the submit node. </p>
+</li>
+<li>
+<p>Compile the code, using the command: </p>
+<div class="codehilite"><pre><span></span><span class="gp">username@osg-learn $</span> gcc -static pascal.c -o pascal
+</pre></div>
+
+
+<p>Note that we have added the <code>-static</code> option to make sure that the compiled binary includes the necessary libraries. This will allow the code to run on any Linux machine, no matter where those libraries are located. </p>
+</li>
+<li>
+<p>Verify that the compiled binary was statically linked:</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@osg-learn $</span> file pascal
+</pre></div>
+
+
+</li>
 </ol>
+<p>The Linux <code>file</code> command provides information about the <em>type</em> or <em>kind</em> of file that is given as an argument. In this case, you should get output like this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@host $</span> file pascal
+<span class="go">pascal: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), <span style="color:blue">statically linked</span>,</span>
+<span class="go">for GNU/Linux 2.6.18, not stripped</span>
+</pre></div>
+
+
+<p>Note the blue text, which clearly states that this executable (software) is statically linked. The same command run on a non-statically linked executable file would include the text <code>dynamically linked (uses shared libs)</code> instead. So with this simple verification step, which could even be run on files that you did not compile yourself, you have some further reassurance that it is safe to use on other Linux machines. (Bonus exercise: Try the <code>file</code> command on lots of other files)</p>
 <h2 id="submit-the-job">Submit the Job<a class="headerlink" href="#submit-the-job" title="Permanent link">&para;</a></h2>
 <p>Now that our code is compiled, we can use it to submit a job.</p>
 <ol>
-<li>Think about what submit file lines we need to use to run this job:<ul>
+<li>
+<p>Think about what submit file lines we need to use to run this job:</p>
+<ul>
 <li>Are there input files?</li>
 <li>Are there command line arguments?</li>
 <li>Where is its output written?</li>
 </ul>
 </li>
+<li>
+<p>Based on what you thought about in 1., find a submit file from earlier in the week that you can modify to run our compiled <code>pascal</code> code.</p>
+</li>
+<li>
+<p>Copy it to the directory with the <code>pascal</code> binary and make those changes. </p>
+</li>
+<li>
+<p>Submit the job using <code>condor_submit</code>. </p>
+</li>
+<li>
+<p>Once the job has run and left the queue, you should be able to see the results (seven rows of Pascal's triangle) in the <code>.out</code> file created by the job.</p>
+</li>
 </ol>
-<p>\</p>
-<ol>
-<li>Based on what you thought about in 1., find a submit file from earlier in the week that you can modify to run our compiled <code>pascal</code> code. \</li>
-</ol>
-<p>Copy it to the directory with the <code>pascal</code> binary and make those changes. \ 2. Submit the job using <code>condor_submit</code>. \ 3. Once the job has run and left the queue, you should be able to see the results (seven rows of \ Pascal's triangle) in the <code>.out</code> file created by the job.</p>
 
   <br>
     
