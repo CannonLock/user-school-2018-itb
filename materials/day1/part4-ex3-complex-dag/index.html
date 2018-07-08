@@ -37,12 +37,12 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Monday Exercise 3.4: A More Complex DAG", url: "#_top", children: [
+          {title: "Monday Exercise 4.3: A More Complex DAG", url: "#_top", children: [
               {title: "Make Your Job Submission Files", url: "#make-your-job-submission-files" },
               {title: "Make your DAG", url: "#make-your-dag" },
               {title: "Running the DAG", url: "#running-the-dag" },
               {title: "Watch Your DAG", url: "#watch-your-dag" },
-              {title: "On Your Own", url: "#on-your-own" },
+              {title: "Bonus Challenge", url: "#bonus-challenge" },
           ]},
         ];
 
@@ -61,11 +61,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <p>a<style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: #008; } </style></p>
-<h1 id="monday-exercise-34-a-more-complex-dag">Monday Exercise 3.4: A More Complex DAG<a class="headerlink" href="#monday-exercise-34-a-more-complex-dag" title="Permanent link">&para;</a></h1>
+    <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
+
+<h1 id="monday-exercise-43-a-more-complex-dag">Monday Exercise 4.3: A More Complex DAG<a class="headerlink" href="#monday-exercise-43-a-more-complex-dag" title="Permanent link">&para;</a></h1>
 <p>The objective of this exercise is to run a real set of jobs with DAGMan.</p>
 <h2 id="make-your-job-submission-files">Make Your Job Submission Files<a class="headerlink" href="#make-your-job-submission-files" title="Permanent link">&para;</a></h2>
-<p>We'll run our <code>goatbrot</code> example. If you didn't read about it yet, <a href="../UserSchool16Mon32Mandelbrot">please do so now</a>. We are going to make a DAG with four simultaneous jobs (<code>goatbrot</code>) and one final node to stitch them together (<code>montage</code>). This means we have five jobs. We're going to run <code>goatbrot</code> with more iterations (100,000) so each job will take longer to run.</p>
+<p>We'll run our <code>goatbrot</code> example. If you didn't read about it yet, <a href="../part4-ex2-mandelbrot/">please do so now</a>. We are going to make a DAG with four simultaneous jobs (<code>goatbrot</code>) and one final node to stitch them together (<code>montage</code>). This means we have five jobs. We're going to run <code>goatbrot</code> with more iterations (100,000) so each job will take longer to run.</p>
 <p>You can create your five jobs. The goatbrot jobs are very similar to each other, but they have slightly different parameters and output files.</p>
 <h3 id="goatbrot1sub">goatbrot1.sub<a class="headerlink" href="#goatbrot1sub" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span>executable              = /usr/local/bin/goatbrot
@@ -166,38 +167,69 @@ queue
 <h2 id="watch-your-dag">Watch Your DAG<a class="headerlink" href="#watch-your-dag" title="Permanent link">&para;</a></h2>
 <p>Let’s follow the progress of the whole DAG:</p>
 <ol>
-<li>Use the <code>watch</code> command to run <code>condor_q -nobatch</code> every 10 seconds: <pre class="screen"></li>
+<li>
+<p>Use the <code>watch</code> command to run <code>condor_q -nobatch</code> every 10 seconds:</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> watch -n <span class="m">10</span> condor_q -nobatch
+</pre></div>
+
+
+<p><span style="color:red"><strong>Here we see DAGMan running:</strong></span> </p>
+<div class="codehilite"><pre><span></span><span class="go"> ID  OWNER  SUBMITTED   RUN_TIME ST PRI SIZE CMD </span>
+<span class="go">71.0 roy   6/22 17:39 0+00:00:03 R  0    0.3 condor_dagman</span>
+</pre></div>
+
+
+<p><span style="color:red"><strong>DAGMan has submitted the goatbrot jobs, but they haven't started running yet</strong></span></p>
+<div class="codehilite"><pre><span></span><span class="go"> ID  OWNER SUBMITTED   RUN_TIME ST PRI SIZE CMD </span>
+<span class="go">71.0 roy  6/22 17:39 0+00:00:17 R  0    0.3 condor_dagman </span>
+<span class="go">72.0 roy  6/22 17:39 0+00:00:00 I  0    0.0 goatbrot -i 100000 </span>
+<span class="go">73.0 roy  6/22 17:39 0+00:00:00 I  0    0.0 goatbrot -i 100000 </span>
+<span class="go">74.0 roy  6/22 17:39 0+00:00:00 I  0    0.0 goatbrot -i 100000 </span>
+<span class="go">75.0 roy  6/22 17:39 0+00:00:00 I  0    0.0 goatbrot -i 100000</span>
+</pre></div>
+
+
+<p><span style="color:red"><strong>They're running</strong></span> </p>
+<div class="codehilite"><pre><span></span><span class="go"> ID  OWNER SUBMITTED   RUN_TIME ST PRI SIZE CMD</span>
+<span class="go">71.0 roy  6/22 17:39 0+00:07:15 R  0    0.3 condor_dagman </span>
+<span class="go">72.0 roy  6/22 17:39 0+00:00:03 R  0    0.0 goatbrot -i 100000 </span>
+<span class="go">73.0 roy  6/22 17:39 0+00:00:03 R  0    0.0 goatbrot -i 100000 </span>
+<span class="go">74.0 roy  6/22 17:39 0+00:00:03 R  0    0.0 goatbrot -i 100000 </span>
+<span class="go">75.0 roy  6/22 17:39 0+00:00:03 R  0    0.0 goatbrot -i 100000</span>
+</pre></div>
+
+
+<p><span style="color:red"><strong>They finished, but DAGMan hasn't noticed yet. It only checks periodically:</strong></span></p>
+<div class="codehilite"><pre><span></span><span class="go"> ID  OWNER SUBMITTED   RUN_TIME ST PRI SIZE CMD </span>
+<span class="go">71.0 roy  6/22 17:39 0+00:08:46 R  0    0.3 condor_dagman</span>
+</pre></div>
+
+
+<p>Eventually, you'll see the montage job submitted, then running, then leave the queue, and then DAGMan will leave the queue.</p>
+</li>
+<li>
+<p>Examine your results. For some reason, goatbrot prints everything to stderr, not stdout.</p>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> cat goatbrot.err.0.0 
+<span class="go">Complex image: Center: -0.75 + 0.75i Width: 1.5 Height: 1.5 Upper Left: -1.5 + 1.5i Lower Right: 0 + 0i</span>
+
+<span class="go">Output image: Filename: tile_0_0.ppm Width, Height: 500, 500 Theme: beej Antialiased: no</span>
+
+<span class="go">Mandelbrot: Max Iterations: 100000 Continuous: no</span>
+
+<span class="go">Goatbrot: Multithreading: not supported in this build</span>
+
+<span class="go">Completed: 100.0%</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Examine your log files (<code>goatbrot.log</code> and <code>montage.log</code>) and DAGMan output file (<code>goatbrot.dag.dagman.out</code>). Do they look as you expect? Can you see the progress of the DAG in the DAGMan output file?</p>
+</li>
+<li>As you did earlier, copy the resulting <code>mandel-from-dag.jpg</code> to your <code>public_html</code> directory, then access it from your web browser. Does the image look correct?</li>
+<li>Clean up your results by removing all of the <code>goatbrot.dag.*</code> files if you like. Be careful to not delete the <code>goatbrot.dag</code> file.</li>
 </ol>
-<p><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>watch -n 10 condor_q -nobatch</strong></p>
-<p><span style="color:red">Here we see DAGMan running:<span class="twiki-macro ENDCOLOR"></span> -- Submitter: learn.chtc.wisc.edu : &lt;128.104.100.55:9618?sock=28867_10e4_2&gt; : learn.chtc.wisc.edu ID OWNER SUBMITTED RUN_TIME ST PRI SIZE CMD 71.0 roy 6/22 17:39 0+00:00:03 R 0 0.3 condor_dagman</p>
-<p>1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended</p>
-<p><span style="color:red">DAGMan has submitted the goatbrot jobs, but they haven't started running yet:<span class="twiki-macro ENDCOLOR"></span> -- Submitter: learn.chtc.wisc.edu : &lt;128.104.100.55:9618?sock=28867_10e4_2&gt; : learn.chtc.wisc.edu ID OWNER SUBMITTED RUN_TIME ST PRI SIZE CMD 71.0 roy 6/22 17:39 0+00:00:17 R 0 0.3 condor_dagman 72.0 roy 6/22 17:39 0+00:00:00 I 0 0.0 goatbrot -i 100000 73.0 roy 6/22 17:39 0+00:00:00 I 0 0.0 goatbrot -i 100000 74.0 roy 6/22 17:39 0+00:00:00 I 0 0.0 goatbrot -i 100000 75.0 roy 6/22 17:39 0+00:00:00 I 0 0.0 goatbrot -i 100000</p>
-<p>5 jobs; 0 completed, 0 removed, 4 idle, 1 running, 0 held, 0 suspended</p>
-<p><span style="color:red">They're running</span> -- Submitter: learn.chtc.wisc.edu : &lt;128.104.100.55:9618?sock=28867_10e4_2&gt; : learn.chtc.wisc.edu ID OWNER SUBMITTED RUN_TIME ST PRI SIZE CMD 71.0 roy 6/22 17:39 0+00:07:15 R 0 0.3 condor_dagman 72.0 roy 6/22 17:39 0+00:00:03 R 0 0.0 goatbrot -i 100000 73.0 roy 6/22 17:39 0+00:00:03 R 0 0.0 goatbrot -i 100000 74.0 roy 6/22 17:39 0+00:00:03 R 0 0.0 goatbrot -i 100000 75.0 roy 6/22 17:39 0+00:00:03 R 0 0.0 goatbrot -i 100000</p>
-<p>5 jobs; 0 completed, 0 removed, 0 idle, 5 running, 0 held, 0 suspended</p>
-<p><span style="color:red">Two of the jobs have finished, while the others are still running:<span class="twiki-macro ENDCOLOR"></span> -- Submitter: learn.chtc.wisc.edu : &lt;128.104.100.55:9618?sock=28867_10e4_2&gt; : learn.chtc.wisc.edu ID OWNER SUBMITTED RUN_TIME ST PRI SIZE CMD 71.0 roy 6/22 17:39 0+00:07:51 R 0 0.3 condor_dagman 72.0 roy 6/22 17:39 0+00:00:39 R 0 0.0 goatbrot -i 100000 74.0 roy 6/22 17:39 0+00:00:39 R 0 0.0 goatbrot -i 100000</p>
-<p>3 jobs; 0 completed, 0 removed, 0 idle, 3 running, 0 held, 0 suspended</p>
-<p><span style="color:red">They finished, but DAGMan hasn't noticed yet. It only checks periodically:<span class="twiki-macro ENDCOLOR"></span> -- Submitter: learn.chtc.wisc.edu : &lt;128.104.100.55:9618?sock=28867_10e4_2&gt; : learn.chtc.wisc.edu ID OWNER SUBMITTED RUN_TIME ST PRI SIZE CMD 71.0 roy 6/22 17:39 0+00:08:46 R 0 0.3 condor_dagman</p>
-<p>1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended</p>
-<p><span style="color:red">DAGMan submitted and ran the montage job. It ran so fast I didn't capture it running. DAGMan will finish up soon <span class="twiki-macro ENDCOLOR"></span> -- Submitter: learn.chtc.wisc.edu : &lt;128.104.100.55:9618?sock=28867_10e4_2&gt; : learn.chtc.wisc.edu ID OWNER SUBMITTED RUN_TIME ST PRI SIZE CMD 71.0 roy 6/22 17:39 0+00:08:55 R 0 0.3 condor_dagman</p>
-<p>1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended</p>
-<p><span style="color:red">Now it's all done:<span class="twiki-macro ENDCOLOR"></span> -- Submitter: learn.chtc.wisc.edu : &lt;128.104.100.55:9618?sock=28867_10e4_2&gt; : learn.chtc.wisc.edu ID OWNER SUBMITTED RUN_TIME ST PRI SIZE CMD</p>
-<p>0 jobs; 0 completed, 0 removed, 0 idle, 0 running, 0 held, 0 suspended </pre></p>
-<ol>
-<li>Examine your results. For some reason, goatbrot prints everything to stderr, not stdout. <pre class="screen"></li>
-</ol>
-<p><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>cat goatbrot.err.0.0</strong> Complex image: Center: -0.75 + 0.75i Width: 1.5 Height: 1.5 Upper Left: -1.5 + 1.5i Lower Right: 0 + 0i</p>
-<p>Output image: Filename: tile_0_0.ppm Width, Height: 500, 500 Theme: beej Antialiased: no</p>
-<p>Mandelbrot: Max Iterations: 100000 Continuous: no</p>
-<p>Goatbrot: Multithreading: not supported in this build</p>
-<p>Completed: 100.0% </pre></p>
-<ol>
-<li><p>Examine your log files (<code>goatbrot.log</code> and <code>montage.log</code>) and DAGMan output file (<code>goatbrot.dag.dagman.out</code>). Do they look as you expect? Can you see the progress of the DAG in the DAGMan output file?</p></li>
-<li><p>As you did earlier, copy the resulting <code>mandel-from-dag.jpg</code> to your <code>public_html</code> directory, then access it from your web browser. Does the image look correct?</p></li>
-<li><p>Clean up your results. Be careful about deleting the <code>goatbrot.dag.*</code> files, you do not want to delete the <code>goatbrot.dag</code> file, just <code>goatbrot.dag.*</code>.</p> <pre class="screen"></li>
-</ol>
-<p><span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>rm goatbrot.dag.*</strong> <span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>rm goatbrot.out.*</strong> <span class="twiki-macro UCL_PROMPT_SHORT"></span> <strong>rm goatbrot.err.*</strong> </pre></p>
-<h2 id="on-your-own">On Your Own<a class="headerlink" href="#on-your-own" title="Permanent link">&para;</a></h2>
+<h2 id="bonus-challenge">Bonus Challenge<a class="headerlink" href="#bonus-challenge" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Re-run your DAG. When jobs are running, try <code>condor_q -nobatch -dag</code>. What does it do differently?</li>
 <li>Challenge, if you have time: Make a bigger DAG by making more tiles in the same area.</li>
@@ -219,9 +251,9 @@ queue
     </div>
     
     <div class="wm-article-nav">
-      <a href="../part4-ex2-simple-dag/" class="btn btn-xs btn-default pull-left">
+      <a href="../part4-ex2-mandelbrot/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../part4-ex2-simple-dag/" class="btn btn-xs btn-link">
+        Previous</a><a href="../part4-ex2-mandelbrot/" class="btn btn-xs btn-link">
         Exercise 4.2
       </a>
     </div>

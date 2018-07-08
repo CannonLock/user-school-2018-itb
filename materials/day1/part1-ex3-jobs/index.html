@@ -138,7 +138,7 @@ Ultimately, a submit file is a text file</p>
 <h3 id="view-your-job-in-the-queue">View your job in the queue<a class="headerlink" href="#view-your-job-in-the-queue" title="Permanent link">&para;</a></h3>
 <p>Now, use <code>condor_q</code> and <code>condor_q -nobatch</code> to watch for your job in the queue! </p>
 <p>You may not even catch the job in the <code>R</code> running state, because the <code>hostname</code> command runs very quickly. When the job itself is finished, it will 'leave' the queue and no longer be listed in the <code>condor_q</code> output.</p>
-<p>After the job finishes, check for the <code>hostname</code> output in <code>simple.out</code>, which is where job information printed to the terminal screen will be printed for the jobi.</p>
+<p>After the job finishes, check for the <code>hostname</code> output in <code>simple.out</code>, which is where job information printed to the terminal screen will be printed for the job.</p>
 <div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> cat simple.out
 <span class="go">e171.chtc.wisc.edu</span>
 </pre></div>
@@ -242,7 +242,7 @@ or perhaps a simple shell script of commands that you'd like to run within a job
 <p>Write the submit file (this should be getting easier by now):</p>
 <div class="codehilite"><pre><span></span>universe = vanilla
 executable = *test-script.sh*
-arguments = &quot;foo bar baz&quot;
+arguments = foo bar baz
 
 output = script.out
 error = script.err

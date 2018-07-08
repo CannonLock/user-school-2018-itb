@@ -37,15 +37,11 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Challenge 1", url: "#_top", children: [
-          ]},
-          {title: "Challenge 2", url: "#challenge-2", children: [
-          ]},
-          {title: "Challenge 3", url: "#challenge-3", children: [
-          ]},
-          {title: "Challenge 4", url: "#challenge-4", children: [
-          ]},
-          {title: "Note: Be Nice", url: "#note-be-nice", children: [
+          {title: "Monday Bonus Exercise 4.5: YOUR Jobs and More on Workflows", url: "#_top", children: [
+              {title: "Challenge 1", url: "#challenge-1" },
+              {title: "Challenge 2", url: "#challenge-2" },
+              {title: "Challenge 3", url: "#challenge-3" },
+              {title: "Note: Be Nice", url: "#note-be-nice" },
           ]},
         ];
 
@@ -64,7 +60,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <h2 id="challenge-1">Challenge 1<a class="headerlink" href="#challenge-1" title="Permanent link">&para;</a></h2>
+    <style type="text/css">
+  pre em { font-style: normal; background-color: yellow; }
+  pre strong { font-style: normal; font-weight: bold; color: \#008; }
+</style>
+
+<h1 id="monday-bonus-exercise-45-your-jobs-and-more-on-workflows">Monday Bonus Exercise 4.5: YOUR Jobs and More on Workflows<a class="headerlink" href="#monday-bonus-exercise-45-your-jobs-and-more-on-workflows" title="Permanent link">&para;</a></h1>
+<p>The objective of this exercise is to learn the very basics of running a set of jobs, where our set is just one job.</p>
+<h2 id="challenge-1">Challenge 1<a class="headerlink" href="#challenge-1" title="Permanent link">&para;</a></h2>
 <p>Do you have any extra computation that needs to be done? Real work, from your life outside this summer school? If so, try it out on our HTCondor pool. Can't think of something? How about one of the existing distributed computing programs like <a href="http://www.distributed.net">distributed.net</a>, <a href="http://setiathome.ssl.berkeley.edu/">SETI@home</a>, <a href="http://www.einsteinathome.org/">Einstien@Home</a> or others that you know. We prefer that you do your own work rather than one of these projects, but they are options.</p>
 <h2 id="challenge-2">Challenge 2<a class="headerlink" href="#challenge-2" title="Permanent link">&para;</a></h2>
 <p>Try to generate other Mandelbrot images. Some possible locations to look at with goatbroat:</p>
@@ -81,18 +84,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <p>Now make a movie! Make a series of images where you zoom into a point in the Mandelbrot set gradually. (Those points above may work well.) Assemble these images with the "convert" tool which will let you convert a set of JPEG files into an MPEG movie.</p>
 <h2 id="challenge-3">Challenge 3<a class="headerlink" href="#challenge-3" title="Permanent link">&para;</a></h2>
-<p>Try out <a href="../OSGSS2012ExtraPegasus">Pegasus</a>. Pegasus is a workflow manager that uses DAGMan and can work in a grid environment and/or run across different types of clusters (with other queueing software). It will create the DAGs from abstract DAG descriptions and ensure they are appropriate for the location of the data and computation.</p>
+<p>Try out Pegasus. Pegasus is a workflow manager that uses DAGMan and can work in a grid environment and/or run across different types of clusters (with other queueing software). It will create the DAGs from abstract DAG descriptions and ensure they are appropriate for the location of the data and computation.</p>
 <p>Links to more information:</p>
 <ul>
-<li><a href="http://pegasus.isi.edu">Pegasus Website</a></li>
-<li><a href="http://pegasus.isi.edu/wms/docs/4.0/">Pegasus Documentation</a></li>
-<li><a href="https://github.com/OSGConnect/tutorial-pegasus">Useful Tutorial</a></li>
-<li><a href="https://pegasus.isi.edu/documentation/tutorial.php">Pegasus on OSG Connect (covered Thursday)</a></li>
+<li><a href="https://pegasus.isi.edu">Pegasus Website</a></li>
+<li><a href="https://pegasus.isi.edu/documentation">Pegasus Documentation</a></li>
+<li><a href="https://support.opensciencegrid.org/support/solutions/articles/5000639789-pegasus">Pegasus on OSG Connect (covered Thursday)</a></li>
 </ul>
 <p>If you have any questions or problems, please feel free to contact the Pegasus team by emailing <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#112;&#101;&#103;&#97;&#115;&#117;&#115;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#105;&#115;&#105;&#46;&#101;&#100;&#117;">&#112;&#101;&#103;&#97;&#115;&#117;&#115;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#105;&#115;&#105;&#46;&#101;&#100;&#117;</a></p>
-<h2 id="challenge-4">Challenge 4<a class="headerlink" href="#challenge-4" title="Permanent link">&para;</a></h2>
-<p>Try out <a href="../OSGSS2012ExtraMakeflow">Makeflow</a>. You can think of it acting like DAGMan, but there several intriguing differences. Now that you understand DAGMan, you should think about how it compares to Makeflow. Why would you use DAGMan or Makeflow?</p>
-<p>These extra exercises for Makeflow were kindly provided by Doug Thain.</p>
 <h2 id="note-be-nice">Note: Be Nice<a class="headerlink" href="#note-be-nice" title="Permanent link">&para;</a></h2>
 <p>Please be polite. Computers in our Condor pool will run multiple jobs at a time, and these computers are shared with your fellow students. If you have jobs that will use significant computational power or memory, limit your jobs to be kind to your neighbors, unless you run your jobs during off-hours.</p>
 

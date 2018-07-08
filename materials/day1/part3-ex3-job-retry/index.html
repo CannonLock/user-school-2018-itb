@@ -99,16 +99,16 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Submit the file and wait for the jobs to finish.</li>
 </ol>
 <p>What output do you expect? What output did you get? If you are curious about the exit code from the job, it is saved in completed jobs in <code>condor_history</code> in the <code>ExitCode</code> attribute. The following command will show the <code>ExitCode</code> for a given cluster of jobs:</p>
-<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_history <span style="color:red">CLUSTERID</span> -af ProcId ExitCode
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_history <span style="color:red">&lt;CLUSTER&gt;</span> -af ProcId ExitCode
 </pre></div>
 
 
-<p>(Be sure to replace <code>CLUSTERID</code> with your actual cluster ID)</p>
+<p>(Be sure to replace <code>&lt;cluster&gt;</code> with your actual cluster ID)</p>
 <p>How many of the jobs succeeded? How many failed?</p>
 <h2 id="retrying-failed-jobs">Retrying Failed Jobs<a class="headerlink" href="#retrying-failed-jobs" title="Permanent link">&para;</a></h2>
 <p>Now let’s see if we can solve the problem of jobs that fail once in a while. In this particular case, if HTCondor runs a failed job again, it has a good chance of succeeding. Not all failing jobs are like this, but in this case it is a reasonable assumption.</p>
 <p>From the lecture materials, implement the <code>max_retries</code> feature to retry any job with a non-zero exit code up to 5 times, then resubmit the jobs. Did your change work?</p>
-<p>After the jobs have finished, examine the log file(s) to see what happened in detail. Did any jobs need to be restarted? Another way to see how many restarts there were is to look at the <code>NumJobStarts</code> attribute of a completed job with the <code>condor_history</code> command, in the same way you looked at the <code>ExitCode</code> attribute earlier. Does the number of retries seem correct? For those jobs which did need to be retried, what is their <code>ExitCode=; and what about the =ExitCode</code> from earlier execution attempts?</p>
+<p>After the jobs have finished, examine the log file(s) to see what happened in detail. Did any jobs need to be restarted? Another way to see how many restarts there were is to look at the <code>NumJobStarts</code> attribute of a completed job with the <code>condor_history</code> command, in the same way you looked at the <code>ExitCode</code> attribute earlier. Does the number of retries seem correct? For those jobs which did need to be retried, what is their <code>ExitCode</code>; and what about the <code>ExitCode</code> from earlier execution attempts?</p>
 <h2 id="a-too-long-running-job">A (Too) Long Running Job<a class="headerlink" href="#a-too-long-running-job" title="Permanent link">&para;</a></h2>
 <p>Sometimes, an ill-behaved job will get stuck in a loop and run forever, instead of exiting with a failure code, and it may just need to be re-run (or run on a different execute server) to complete without getting stuck. We can modify our Python program to simulate this kind of bad job with the following file:</p>
 <div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
@@ -148,7 +148,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 </li>
 <li>
-<p>Submit the new file. Do the long running jobs get removed? What does <code>condor_history</code> show for the cluster after all jobs are done? Which job status (i.e. idle, held, running) do you think "JobStatus == 2" corresponds to?</p>
+<p>Submit the new file. Do the long running jobs get removed? What does <code>condor_history</code> show for the cluster after all jobs are done? Which job status (i.e. idle, held, running) do you think <code>JobStatus == 2</code> corresponds to?</p>
 </li>
 </ol>
 <h2 id="bonus-exercise">Bonus Exercise<a class="headerlink" href="#bonus-exercise" title="Permanent link">&para;</a></h2>
@@ -160,11 +160,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../part4-ex1-mandelbrot/" class="btn btn-xs btn-default pull-right">
+      <a href="../part4-ex1-simple-dag/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../part4-ex1-mandelbrot/" class="btn btn-xs btn-link">
+      <a href="../part4-ex1-simple-dag/" class="btn btn-xs btn-link">
         Exercise 4.1
       </a>
     </div>

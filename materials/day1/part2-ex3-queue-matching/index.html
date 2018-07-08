@@ -125,7 +125,7 @@ queue
 <li>
 <p>Download and unpack some books from Project Gutenberg:</p>
 <div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> wget http://proxy.chtc.wisc.edu/SQUID/osgschool18/books.zip
-<span class="go">unzip books.zip</span>
+<span class="gp">username@learn $</span> unzip books.zip
 </pre></div>
 
 
@@ -136,11 +136,11 @@ queue
 <li>Create a submit file to submit one job (pick a book file and model your submit file off of the one above), including memory and disk requests of 20 MB; submit it, if you like.</li>
 <li>
 <p>Modify the following submit file statements to work for all books:</p>
-<div class="codehilite"><pre><span></span><span class="nv">transfer_input_files</span> <span class="o">=</span> <span class="k">$(</span>BOOK<span class="k">)</span> 
-<span class="nv">arguments</span> <span class="o">=</span> <span class="k">$(</span>book<span class="k">)</span> 
-<span class="nv">output</span> <span class="o">=</span> <span class="k">$(</span>book<span class="k">)</span>.out 
-<span class="nv">error</span> <span class="o">=</span> <span class="k">$(</span>book<span class="k">)</span>.err 
-<span class="err">queue</span> <span class="err">book</span> <span class="err">matching</span> <span class="err">*.txt</span>
+<div class="codehilite"><pre><span></span>transfer_input_files = $(BOOK) 
+arguments = $(book) 
+output = $(book).out 
+error = $(book).err 
+queue book matching *.txt
 </pre></div>
 
 
@@ -158,19 +158,19 @@ queue
 <div class="codehilite"><pre><span></span>...
 
 transfer_input_files = AAiW.txt
-arguments = &amp;quot;AAiW.txt&amp;quot;
+arguments = &quot;AAiW.txt&quot;
 output = AAiW.txt.out
 error = AAiW.txt.err
 queue
 
 transfer_input_files = PandP.txt
-arguments = &amp;quot;PandP.txt&amp;quot;
+arguments = &quot;PandP.txt&quot;
 output = PandP.txt.out
 error = PandP.txt.err
 queue
 
 transfer_input_files = TAoSH.txt
-arguments = &amp;quot;TAoSH.txt&amp;quot;
+arguments = &quot;TAoSH.txt&quot;
 output = TAoSH.txt.out
 error = TAoSH.txt.err
 queue

@@ -92,7 +92,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">iterations</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="nl">usage</span><span class="p">:</span> <span class="n">circlepi</span> <span class="n">ITERATIONS</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;usage: circlepi ITERATIONS</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
     <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
   <span class="p">}</span>
 
@@ -104,7 +104,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <span class="p">}</span>
   <span class="p">}</span>
   <span class="n">pi_estimate</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="p">((</span><span class="kt">double</span><span class="p">)</span> <span class="n">inside_circle</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">iterations</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">%</span><span class="n">d</span> <span class="n">iterations</span><span class="p">,</span> <span class="o">%</span><span class="n">d</span> <span class="n">inside</span><span class="p">;</span> <span class="n">pi</span> <span class="o">=</span> <span class="o">%</span><span class="n">f</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">inside_circle</span><span class="p">,</span> <span class="n">pi_estimate</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d iterations, %d inside; pi = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">inside_circle</span><span class="p">,</span> <span class="n">pi_estimate</span><span class="p">);</span>
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -121,7 +121,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
 <li>
 <p>Test the program with just 1000 samples:</p>
-<div class="codehilite"><pre><span></span><span class="go">./circlepi 1000</span>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> ./circlepi <span class="m">1000</span>
 </pre></div>
 
 

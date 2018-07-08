@@ -75,7 +75,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Determine the job ID (<code>cluster.process</code>) from the <code>condor_submit</code> output or from <code>condor_q</code></li>
 <li>
 <p>Remove the job:</p>
-<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">job_id</span>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">&lt;JOB.ID&gt;</span>
 </pre></div>
 
 
@@ -86,7 +86,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
 </ol>
 <p>So far, we have created job clusters that contain only one job process (the <code>.0</code> part of the job ID). That will change soon, so it is good to know how to remove a specific job ID. However, it is possible to remove all jobs that are part of a cluster at once. Simply omit the job process (the <code>.0</code> part of the job ID) in the <code>condor_rm</code> command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">cluster</span>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">&lt;CLUSTER&gt;</span>
 </pre></div>
 
 
@@ -97,7 +97,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <h2 id="removing-all-of-your-jobs">Removing All of Your Jobs<a class="headerlink" href="#removing-all-of-your-jobs" title="Permanent link">&para;</a></h2>
 <p>If you really want to remove all of your jobs at once, you can do that with:</p>
-<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">username</span>
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> condor_rm <span style="color:red">&lt;USERAME&gt;</span>
 </pre></div>
 
 

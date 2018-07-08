@@ -71,12 +71,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ol>
 <li>
 <p>Save the script below in a file named <code>sandbox.sh</code>:</p>
-<div class="codehilite"><pre><span></span>#/bin/sh
-echo &#39;Date: &#39; `date`
-echo &#39;Host: &#39; `hostname` 
-echo &#39;Sandbox: &#39; `pwd` 
-echo ls -alF&lt;/pre&gt;
-# END
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="nb">echo</span> <span class="s1">&#39;Date: &#39;</span> <span class="sb">`</span>date<span class="sb">`</span>
+<span class="nb">echo</span> <span class="s1">&#39;Host: &#39;</span> <span class="sb">`</span>hostname<span class="sb">`</span> 
+<span class="nb">echo</span> <span class="s1">&#39;Sandbox: &#39;</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> 
+<span class="nb">echo</span> ls -alF
+<span class="c1"># END</span>
 </pre></div>
 
 
@@ -129,7 +129,7 @@ echo ls -alF&lt;/pre&gt;
 <p>So, HTCondor wrote copies of the job and machine ads (for use by the job, if desired), transferred your executable (<code>sandbox.sh</code>), renamed it (<code>condor_exec.exe</code>), ran it, and saved its standard output and standard error into files. Notice that your submit file, which was in the same directory on the submit machine as your executable, was <strong>not</strong> transferred, nor were any other files that happened to be in directory with the submit file.</p>
 <p>Now that we know something about the sandbox, we can transfer more files to and from it.</p>
 <h2 id="running-a-job-with-input-files">Running a Job With Input Files<a class="headerlink" href="#running-a-job-with-input-files" title="Permanent link">&para;</a></h2>
-<p>Next, you will run a job that requires an input file. As with all previous examples, you will tell HTCondor to transfer files to the sandbox (=should_transfer_files = YES=). Remember, the initial job sandbox contains only the renamed job executable and nothing else from your directory on the submit machine. You must tell HTCondor explicitly about every other file to transfer to the sandbox. Fortunately, this is easy.</p>
+<p>Next, you will run a job that requires an input file. Remember, the initial job sandbox will contain only the renamed job executable, unless you tell HTCondor explicitly about every other file that needs to be ransfered. Fortunately, this is easy.</p>
 <p>Here is a simple Python script that takes the name of an input file (containing one word per line) from the command line, counts the number of times each (lowercased) word occurs in the text, and prints out the final list of words and their counts.</p>
 <div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
@@ -158,7 +158,7 @@ echo ls -alF&lt;/pre&gt;
 
 
 <ol>
-<li>Save the Python script in a file named <code>freq.py</code></li>
+<li>Save the Python script in a file named <code>freq.py</code>.</li>
 <li>
 <p>Download the input file for the script (263K lines, ~1.4 MB) and save it in your submit directory:</p>
 <div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> wget http://proxy.chtc.wisc.edu/SQUID/osgschool18/mon-2.1-words.txt
@@ -167,7 +167,7 @@ echo ls -alF&lt;/pre&gt;
 
 </li>
 <li>
-<p>Create a basic submit file for the <code>freq.py</code> executable</p>
+<p>Create a basic submit file for the <code>freq.py</code> executable.</p>
 </li>
 <li>
 <p>Add a line to tell HTCondor to transfer the input file:</p>
@@ -178,7 +178,7 @@ echo ls -alF&lt;/pre&gt;
 <p>As with all submit file commands, it does not matter where this line goes, as long as it comes before the word <code>queue</code>.</p>
 </li>
 <li>
-<p>Do not forget to add a line to name the input file as the argument to the Python script</p>
+<p>Do not forget to add a line to name the input file as the argument to the Python script.</p>
 </li>
 <li>Submit the job, wait for it to finish, and check the output!</li>
 </ol>
