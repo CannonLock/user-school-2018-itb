@@ -66,11 +66,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>write the DAG for the workflow you planned, and</li>
 <li>submit this workflow on <code>learn.chtc.wisc.edu</code></li>
 </ul>
-<p>There are bonus tasks in <a href="../part2-ex2-workflow-tuning/">Exercise 1.4</a>, if you get through this part quickly, including running the workflow on the Open Science Grid.</p>
+<p>There are bonus tasks in <a href="../part2-ex2-workflow-tuning">Exercise 1.4</a>, if you get through this part quickly, including running the workflow on the Open Science Grid.</p>
 <h2 id="steps-to-take">Steps to Take<a class="headerlink" href="#steps-to-take" title="Permanent link">&para;</a></h2>
 <p>Note: While one person in your group works on step 1, someone else can work on step 2.</p>
 <h3 id="1-finish-optimizing-job-components">1. Finish optimizing job components<a class="headerlink" href="#1-finish-optimizing-job-components" title="Permanent link">&para;</a></h3>
-<p>In the <a href="../part1-ex2-plan-workflow/">previous exercise</a> we ran some tests to find the optimal values for the <em>permutation</em> and <em>qtl</em> job steps. Now we want to implement these values and confirm that they work. The steps to take are as follows:</p>
+<p>In the <a href="../../../materials/day5/part1-ex2-plan-workflow">previous exercise</a> we ran some tests to find the optimal values for the <em>permutation</em> and <em>qtl</em> job steps. Now we want to implement these values and confirm that they work. The steps to take are as follows:</p>
 <ol>
 <li>Based on your previous tests, modify the <em>permutation</em> submit file for each trait according to:<ul>
 <li>the optimal number of <em>job processes</em> (how many jobs to <code>queue</code>)</li>
@@ -98,7 +98,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>To <strong>quickly</strong> check that you've got the details of the DAG correct, modify your <em>permutation</em> submit files to submit only a few jobs, and with each job performing a much smaller number of permutations (say, ~10?).</p>
 <h3 id="3-run-a-production-workflow">3. Run a production workflow<a class="headerlink" href="#3-run-a-production-workflow" title="Permanent link">&para;</a></h3>
 <p>Once you have run a quick test of the DAG and you know all the steps are working together, you can submit a full-scale run of the DAG! To do so, <strong>modify the <em>permutation</em> submit files to the values you chose when optimizing the <em>permutation</em> step</strong> (remember, this should be about 100,000 total permutations for each trait) and then submit the DAG. If you have any issues, consult the log and out files for the DAG and jobs, and modify your approach at any of the previous steps. While the full-scale DAG is running, you may wish to further detail your drawn workflow, including information regarding resource usage. Share all submit and DAG files with one another so everyone has a copy.</p>
-<p>If you have time (even while step 3 is running smoothly), move on to the Bonus Tasks in <a href="../part2-ex2-workflow-tuning/">Exercise 1.4</a></p>
+<p>If you have time (even while step 3 is running smoothly), move on to the Bonus Tasks in <a href="../../../materials/day5/part2-ex2-workflow-tuning">Exercise 1.4</a></p>
 
   <br>
     

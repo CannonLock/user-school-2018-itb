@@ -78,14 +78,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="view-joes-files">View Joe's files<a class="headerlink" href="#view-joes-files" title="Permanent link">&para;</a></h2>
 <p><strong>(but don't do anything with them until the next <a href="../part1-ex2-plan-workflow/">exercise</a>, where you'll plan necessary developments of a workflow for Joe.)</strong></p>
 <p>Log in to <code>learn.chtc.wisc.edu</code> and move to a desired location in your home directory. Enter the following commands to download and decompress/untar Joe’s job ingredients:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@learn $</span> &lt;strong&gt;wget http://proxy.chtc.wisc.edu/SQUID/osgschool17/WorkflowExercise.tar.gz&lt;/strong&gt;
-<span class="gp">user@learn $</span> &lt;strong&gt;tar -xzf WorkflowExercise.tar.gz&lt;/strong&gt;
+<div class="codehilite"><pre><span></span><span class="gp">username@learn $</span> wget http://proxy.chtc.wisc.edu/SQUID/osgschool18/WorkflowExercise.tar.gz
+<span class="gp">username@learn $</span> tar -xzf WorkflowExercise.tar.gz
 </pre></div>
 
 
 <p>You can now navigate into the <code>WorkflowExercise</code> directory to view the full ingredients for Joe’s Computing work. Review all of these files based upon the information below and refer back to it as you proceed through the remaining exercises (1.2-1.4). (If you've been drawing a diagram of Joe's work so far, feel free to annotate with some of this information.)</p>
 <p>Based upon Joe’s description and submit files you determine the following details for each step:</p>
-<h4 id="permutation-step"><strong>Permutation Step</strong><a class="headerlink" href="#permutation-step" title="Permanent link">&para;</a></h4>
+<p><strong>Permutation Step</strong></p>
 <p>Note that the files below are the necessary files to submit the permutation calculations for <strong>one</strong> trait (in this case, trait 1). There are additional submit files to perform this step for the other traits.</p>
 <p>Submit file:</p>
 <ul>
@@ -114,10 +114,10 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>a series of .log and .out files, named from the first argument (<code>1_$(Process)</code>). This looks like: <code>runR.1_0.out</code>, <code>runR.1_0.log</code>, <code>runR.1_0.err</code></li>
 <li>the actual output file, named using the <code>1</code> and <code>$(Process)</code> arguments, like so: <code>perm_part.1_0.Rdat</code></li>
 </ul>
-<h4 id="combine-permutation-output"><strong>Combine Permutation Output</strong><a class="headerlink" href="#combine-permutation-output" title="Permanent link">&para;</a></h4>
+<p><strong>Combine Permutation Output</strong></p>
 <p><code>tarit.sh</code> is run after each trait's Permutation step (with the column number as an argument) to compress <code>perm_part.1_0.Rdat</code> (or potentially multiple such files named according to "perm_part.1_*.Rdat") for the QTL step.</p>
 <p>Sample execution: * <code>./tarit.sh 1</code>, where "1" is the trait column number.</p>
-<h4 id="qtl-mapping-step"><strong>QTL Mapping Step</strong><a class="headerlink" href="#qtl-mapping-step" title="Permanent link">&para;</a></h4>
+<p><strong>QTL Mapping Step</strong></p>
 <p>Again, the files below are for submitting the <em>QTL</em> calculations for <strong>one</strong> trait (in this case, trait 1). There are additional submit files to perform this step for the other traits.</p>
 <p>Submit file:</p>
 <ul>
@@ -144,7 +144,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>a series of .log and .out files, named from the first argument (<code>qtl_1</code>).</li>
 <li>several output files named for the trait argument <code>1</code>: <code>perm_combined_1.Rdat</code>, <code>perm_summary_1.txt</code>, <code>sim_geno_results_1.Rdat</code>, <code>qtl_1.Rdat</code>, <code>refined_qtl_summary_1.txt</code>, <code>refined qtl_1.Rdat</code>, and <code>fit_qtl_results_1.Rdat</code></li>
 </ul>
-<h4 id="combine-all-output"><strong>Combine All Output</strong><a class="headerlink" href="#combine-all-output" title="Permanent link">&para;</a></h4>
+<p><strong>Combine All Output</strong></p>
 <p><code>results_1.tar.gz</code> is made by running <code>taritall.sh</code> (with the column number as an argument) after the QTL step for that trait finishes, where "1" reflects the trait column number in the output above.</p>
 <p>Sample execution:</p>
 <ul>
